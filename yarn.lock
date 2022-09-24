@@ -6568,7 +6568,7 @@ __metadata:
     react-hotkeys-hook: ^3.4.6
     react-router-dom: ^6.3.0
     recoil: ^0.7.2
-    typescript: ^4.7.2
+    typescript: ^4.8.3
     vite: ^2.9.9
     vite-plugin-pwa: ^0.12.0
     workbox-window: ^6.5.4
@@ -7605,7 +7605,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.7.2":
+"typescript@npm:^4.8.3":
   version: 4.8.3
   resolution: "typescript@npm:4.8.3"
   bin:
@@ -7615,7 +7615,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.7.2#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.8.3#~builtin<compat/typescript>":
   version: 4.8.3
   resolution: "typescript@patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"
   bin:
