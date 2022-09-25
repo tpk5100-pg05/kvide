@@ -5,15 +5,17 @@ import { useLiveQuery } from 'dexie-react-hooks';
 
 import Meta from '@/components/Meta';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
-import useEpisodes from '@/store/episodes';
+import EpisodeActions from '@/store/episodes';
 import { TreatmentEffectiveness } from '@/store/types';
 
 function Page2() {
-  const episodesActions = useEpisodes();
+  const episodes = useLiveQuery(() => EpisodeActions.queryEpisodes());
+
+  console.log(episodes);
 
   const saveEpisode = async () => {
     try {
-      await episodesActions.addEpisode({
+      await EpisodeActions.addEpisode({
         start_time: new Date(),
         end_time: new Date(),
         pain_level: 1,
@@ -26,10 +28,6 @@ function Page2() {
       // through form
     }
   };
-
-  const episodes = useLiveQuery(() => episodesActions.queryEpisodes(), []);
-
-  console.log(episodes);
 
   return (
     <>
