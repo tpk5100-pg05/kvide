@@ -7,9 +7,18 @@ interface Episode {
   id?: Readonly<number>;
   start_time: Date;
   end_time?: Date;
+  pain_level?: number;
+  treatment_effectiveness?: TreatmentEffectiveness;
   symptoms: Symptom[];
   medications: Medication[];
   notes?: string;
+}
+
+const enum TreatmentEffectiveness {
+  RELAPSE = 0,
+  NO_IMPROVEMENT = 1,
+  SOME_IMPROVEMENT = 2,
+  GOOD_IMPROVEMENT = 3,
 }
 
 type EpisodeInsertable = Omit<Episode, 'id' | 'symptoms' | 'medications'> & {
@@ -46,3 +55,5 @@ export type {
   MedicationInsertable,
   SymptomUpdatable,
 };
+
+export { TreatmentEffectiveness };

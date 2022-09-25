@@ -1,15 +1,17 @@
 import { useCallback, useMemo } from 'react';
 
-import { Actions, EpisodesState } from './types';
+import { Actions } from './types';
 import { Episode, EpisodeInsertable, EpisodeUpdatable } from '@/store/types';
 import { EpisodeSchema, loggbokDB } from '@/store/loggbok-db';
 import { NotUndefined } from '@/utils/not-undefined';
 
-const useEpisodes = (): [EpisodesState, Actions] => {
+const useEpisodes = (): Actions => {
   const addEpisode = useCallback<Actions['addEpisode']>(async (episode: EpisodeInsertable) => {
     const insertableEpisode: EpisodeSchema = {
       start_time: episode.start_time,
       end_time: episode.end_time,
+      pain_level: episode.pain_level,
+      treatmentEffectiveness: episode.treatment_effectiveness?.valueOf(),
       notes: episode.notes,
       symptomIds: episode.symptoms.map((symptom) => symptom.id),
       medicationIds: episode.medications.map((medication) => medication.id),
@@ -94,7 +96,7 @@ const useEpisodes = (): [EpisodesState, Actions] => {
     [addEpisode, editEpisode, getEpisode, queryEpisodes],
   );
 
-  return [{}, actions];
+  return actions;
 };
 
 export default useEpisodes;

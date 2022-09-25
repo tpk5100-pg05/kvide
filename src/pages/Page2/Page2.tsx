@@ -6,15 +6,18 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import Meta from '@/components/Meta';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
 import useEpisodes from '@/store/episodes';
+import { TreatmentEffectiveness } from '@/store/types';
 
 function Page2() {
-  const [, episodesActions] = useEpisodes();
+  const episodesActions = useEpisodes();
 
   const saveEpisode = async () => {
     try {
       await episodesActions.addEpisode({
         start_time: new Date(),
         end_time: new Date(),
+        pain_level: 1,
+        treatment_effectiveness: TreatmentEffectiveness.SOME_IMPROVEMENT,
         symptoms: [],
         medications: [],
       });
@@ -25,6 +28,8 @@ function Page2() {
   };
 
   const episodes = useLiveQuery(() => episodesActions.queryEpisodes(), []);
+
+  console.log(episodes);
 
   return (
     <>
