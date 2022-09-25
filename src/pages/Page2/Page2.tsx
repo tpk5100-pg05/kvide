@@ -10,8 +10,12 @@ function Page2() {
   const [episodes, episodesActions] = useEpisodes();
 
   useEffect(() => {
-    if (episodes.episodes == null) {
-      episodesActions.fetchAllEpisodes();
+    if (episodes.episodes.length <= 0) {
+      try {
+        episodesActions.fetchAllEpisodes();
+      } catch (e) {
+        console.error(e);
+      }
     }
   });
 
@@ -36,8 +40,8 @@ function Page2() {
       <FullSizeCenteredFlexBox flexDirection={'column'}>
         <Typography variant="h3">Home</Typography>
         {episodes.episodes !== null &&
-          episodes.episodes.map((episode) => (
-            <Typography key={episode.id}>{episode.id}</Typography>
+          episodes.episodes.map((episode, index) => (
+            <Typography key={index}>{episode.id}</Typography>
           ))}
         <Button onClick={saveEpisode}>Add an episode</Button>
       </FullSizeCenteredFlexBox>

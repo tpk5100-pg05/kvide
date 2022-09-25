@@ -76,7 +76,10 @@ const useEpisodes = (): [EpisodesState, Actions] => {
 };
 
 const fetchEpisodes = (): Episode[] => {
-  return JSON.parse(localStorage.getItem('episodes') || '[]') || [];
+  const episodes = JSON.parse(localStorage.getItem('episodes') || '[]') || [];
+
+  console.log(episodes);
+  return episodes;
 };
 
 const editEpisodeDB = async (episode: Episode): Promise<void> => {
