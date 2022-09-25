@@ -1,106 +1,100 @@
 import { useCallback, useMemo } from 'react';
-import { atom, useRecoilState } from 'recoil';
 
-import { Actions, Episode, EpisodesState } from './types';
-
-const episodesState = atom<EpisodesState>({
-  key: 'episodes-state',
-  default: { episodes: [], currentEpisodeId: '' },
-});
+import { Actions, EpisodesState } from './types';
+import { Episode, EpisodeInsertable, EpisodeUpdatable } from '@/store/types';
+import { EpisodeSchema, loggbokDB } from '@/store/loggbok-db';
+import { NotUndefined } from '@/utils/not-undefined';
 
 const useEpisodes = (): [EpisodesState, Actions] => {
-  const [episodes, setEpisodes] = useRecoilState(episodesState);
+  const addEpisode = useCallback<Actions['addEpisode']>(async (episode: EpisodeInsertable) => {
+    const insertableEpisode: EpisodeSchema = {
+      start_time: episode.start_time,
+      end_time: episode.end_time,
+      notes: episode.notes,
+      symptomIds: episode.symptoms.map((symptom) => symptom.id),
+      medicationIds: episode.medications.map((medication) => medication.id),
+    };
 
-  const addEpisode = useCallback(
-    (episode: Episode) => {
-      setEpisodes((prev) => {
-        const episodes = [...prev.episodes, episode];
-        return { ...prev, episodes };
-      });
+    const res = await loggbokDB.episodes.add(insertableEpisode);
+    const createdEpisode = await loggbokDB.episodes.get(res);
 
-      return addEpisodeDB(episode);
-    },
-    [setEpisodes],
-  );
-
-  /**
-   * edit an episode in store
-   */
-  const editEpisode = useCallback(
-    (episode: Episode) => {
-      setEpisodes((episodes): EpisodesState => {
-        const index = episodes.episodes.findIndex((episode: Episode) => {
-          return episode.id === episode.id;
-        });
-
-        if (index !== -1) {
-          const replacedEpisodes = [...episodes.episodes];
-          replacedEpisodes[index] = episode;
-          return { ...episodes, episodes: replacedEpisodes };
-        }
-
-        return episodes;
-      });
-
-      return editEpisodeDB(episode);
-    },
-    [setEpisodes],
-  );
-
-  const fetchAllEpisodes = useCallback(async () => {
-    try {
-      const newEpisodes = await fetchEpisodes();
-      setEpisodes((prev) => {
-        return { ...prev, episodes: newEpisodes };
-      });
-    } catch (error) {
-      return Promise.reject(error);
+    if (!createdEpisode) {
+      throw new Error('Could not create episode');
     }
-  }, [setEpisodes]);
 
-  const setCurrentEpisode = useCallback(
-    (id: string) => {
-      setEpisodes((episodes): EpisodesState => {
-        return { ...episodes, currentEpisodeId: id };
-      });
+    return loggbokDB.joinEpisodeRow(createdEpisode);
+  }, []);
+
+  const editEpisode = useCallback<Actions['editEpisode']>(
+    async (id: NotUndefined<Episode['id']>, episode: EpisodeUpdatable) => {
+      await loggbokDB.episodes.update(id, episode);
     },
-    [setEpisodes],
+    [],
+  );
+
+  const getEpisode = useCallback<Actions['getEpisode']>(async (id: NotUndefined<Episode['id']>) => {
+    const episode = await loggbokDB.episodes.get(id);
+
+    if (!episode) {
+      throw new Error('Could not find episode');
+    }
+
+    return loggbokDB.joinEpisodeRow(episode);
+  }, []);
+
+  const queryEpisodes = useCallback<Actions['queryEpisodes']>(
+    async (query = {}, order = 'asc', orderBy = 'id') => {
+      let storedEpisodes = !query.ids
+        ? await loggbokDB.episodes.toCollection()
+        : await loggbokDB.episodes.where('id').anyOf(query.ids);
+
+      if (query.start_time) {
+        storedEpisodes = storedEpisodes.and((episode) => episode.start_time === query.start_time);
+      }
+      if (query.end_time) {
+        storedEpisodes = storedEpisodes.and((episode) => episode.end_time === query.end_time);
+      }
+      if (query.notes) {
+        // TODO: fix type error
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        storedEpisodes = storedEpisodes.and((episode) => !!episode.notes?.includes(query.notes!));
+      }
+      if (query.symptoms) {
+        storedEpisodes = storedEpisodes.and((episode) =>
+          episode.symptomIds.some((id) => query.symptoms?.includes(id)),
+        );
+      }
+      if (query.medications) {
+        storedEpisodes = storedEpisodes.and((episode) =>
+          episode.medicationIds.some((id) => query.medications?.includes(id)),
+        );
+      }
+      if (query.before) {
+        // TODO: fix type error
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        storedEpisodes = storedEpisodes.and((episode) => episode.start_time < query.before!);
+      }
+      if (query.after) {
+        // TODO: fix type error
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        storedEpisodes = storedEpisodes.and((episode) => episode.start_time > query.after!);
+      }
+
+      if (order === 'asc') {
+        storedEpisodes = storedEpisodes.reverse();
+      }
+
+      return loggbokDB.joinEpisodeRows(await storedEpisodes.sortBy(orderBy));
+    },
+    [],
   );
 
   const actions = useMemo(
-    () => ({ addEpisode, editEpisode, fetchAllEpisodes, setCurrentEpisode }),
-    [addEpisode, editEpisode, fetchAllEpisodes, setCurrentEpisode],
+    () => ({ addEpisode, editEpisode, getEpisode, queryEpisodes }),
+    [addEpisode, editEpisode, getEpisode, queryEpisodes],
   );
 
-  return [episodes, actions];
-};
-
-const fetchEpisodes = (): Episode[] => {
-  return JSON.parse(localStorage.getItem('episodes') || '[]') || [];
-};
-
-const editEpisodeDB = async (episode: Episode): Promise<void> => {
-  // TODO actually edit or insert the episode in indexDB
-
-  const episodes = JSON.parse(localStorage.getItem('episodes') || '[]') || [];
-
-  const index = episodes.findIndex((episode: Episode) => {
-    return episode.id === episode.id;
-  });
-
-  if (index !== -1) {
-    episodes[index] = episode;
-  } else {
-    episodes.push(episode);
-  }
-
-  localStorage.setItem('episodes', JSON.stringify(episodes));
-};
-
-const addEpisodeDB = async (episode: Episode): Promise<void> => {
-  // TODO actually add an episode entry in indexDB
-  const episodes = JSON.parse(localStorage.getItem('episodes') || '[]') || [];
-  localStorage.setItem('episodes', JSON.stringify([...episodes, episode]));
+  return [{}, actions];
 };
 
 export default useEpisodes;
