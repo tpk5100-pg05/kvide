@@ -6,10 +6,9 @@ import { NotUndefined } from '@/utils/not-undefined';
 export type SymptomSchema = WithOptionalProperty<Symptom, 'id'>;
 export type MedicationSchema = WithOptionalProperty<Medication, 'id'>;
 export type EpisodeSchema = Partial<Pick<Episode, 'id'>> &
-  Omit<Episode, 'symptoms' | 'medications' | 'treatment_effectiveness'> & {
+  Omit<Episode, 'symptoms' | 'medications'> & {
     symptomIds: NotUndefined<SymptomSchema['id']>[];
     medicationIds: NotUndefined<MedicationSchema['id']>[];
-    treatmentEffectiveness?: number;
   };
 
 export class LoggbokDB extends Dexie {
@@ -34,7 +33,7 @@ export class LoggbokDB extends Dexie {
       start_time: episode.start_time,
       end_time: episode.end_time,
       pain_level: episode.pain_level,
-      treatment_effectiveness: episode.treatmentEffectiveness,
+      treatment_effectiveness: episode.treatment_effectiveness,
       medications,
       symptoms,
       notes: episode.notes,
@@ -42,8 +41,7 @@ export class LoggbokDB extends Dexie {
   }
 
   async joinEpisodeRows(episodes: EpisodeSchema[]): Promise<Episode[]> {
-    const episodesParsed = Promise.all(episodes.map((episode) => this.joinEpisodeRow(episode)));
-    return episodesParsed;
+    return Promise.all(episodes.map((episode) => this.joinEpisodeRow(episode)));
   }
 }
 

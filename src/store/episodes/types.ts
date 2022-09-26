@@ -12,6 +12,9 @@ interface EpisodeQuery {
   start_time?: Date;
   end_time?: Date;
 
+  treatment_effectiveness?: Episode['treatment_effectiveness'];
+  pain_level?: Episode['pain_level'];
+
   symptoms?: NotUndefined<Symptom>['id'][];
   medications?: NotUndefined<Symptom>['id'][];
 
@@ -30,6 +33,7 @@ type Actions = {
     order?: EpisodeOrder,
     orderBy?: EpisodeOrderBy,
   ) => Promise<Episode[]>;
+  deleteEpisode: (id: NotUndefined<Episode['id']>) => Promise<void>;
 };
 
 export type { Actions, EpisodesState, EpisodeQuery, EpisodeOrder, EpisodeOrderBy };

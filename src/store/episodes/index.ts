@@ -4,17 +4,17 @@ import { EpisodeSchema, loggbokDB } from '@/store/loggbok-db';
 import { NotUndefined } from '@/utils/not-undefined';
 
 const addEpisode = async (episode: EpisodeInsertable) => {
-  const insertableEpisode: EpisodeSchema = {
+  const episodeToCreate: EpisodeSchema = {
     start_time: episode.start_time,
     end_time: episode.end_time,
     pain_level: episode.pain_level,
-    treatmentEffectiveness: episode.treatment_effectiveness?.valueOf(),
+    treatment_effectiveness: episode.treatment_effectiveness,
     notes: episode.notes,
     symptomIds: episode.symptoms.map((symptom) => symptom.id),
     medicationIds: episode.medications.map((medication) => medication.id),
   };
 
-  const res = await loggbokDB.episodes.add(insertableEpisode);
+  const res = await loggbokDB.episodes.add(episodeToCreate);
   const createdEpisode = await loggbokDB.episodes.get(res);
 
   if (!createdEpisode) {
@@ -43,51 +43,61 @@ const queryEpisodes = async (
   order: EpisodeOrder = 'asc',
   orderBy: EpisodeOrderBy = 'id',
 ): Promise<Episode[]> => {
-  let storedEpisodes = !query.ids
-    ? await Promise.resolve(loggbokDB.episodes.toCollection())
-    : await loggbokDB.episodes.where('id').anyOf(query.ids);
+  let foundEpisodes = await Promise.resolve(
+    !query.ids
+      ? loggbokDB.episodes.toCollection()
+      : loggbokDB.episodes.where('id').anyOf(query.ids),
+  );
 
-  if (query.start_time) {
-    storedEpisodes = storedEpisodes.and((episode) => episode.start_time === query.start_time);
+  if (typeof query.start_time !== 'undefined') {
+    foundEpisodes = foundEpisodes.and((episode) => episode.start_time === query.start_time);
   }
-  if (query.end_time) {
-    storedEpisodes = storedEpisodes.and((episode) => episode.end_time === query.end_time);
+  if (typeof query.end_time !== 'undefined') {
+    foundEpisodes = foundEpisodes.and((episode) => episode.end_time === query.end_time);
   }
-  if (query.notes) {
+  if (typeof query.notes !== 'undefined') {
     // TODO: fix type error
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    storedEpisodes = storedEpisodes.and((episode) => !!episode.notes?.includes(query.notes!));
+    foundEpisodes = foundEpisodes.and((episode) => !!episode.notes?.includes(query.notes!));
   }
   if (query.symptoms) {
-    storedEpisodes = storedEpisodes.and((episode) =>
+    foundEpisodes = foundEpisodes.and((episode) =>
       episode.symptomIds.some((id) => query.symptoms?.includes(id)),
     );
   }
   if (query.medications) {
-    storedEpisodes = storedEpisodes.and((episode) =>
+    foundEpisodes = foundEpisodes.and((episode) =>
       episode.medicationIds.some((id) => query.medications?.includes(id)),
     );
   }
-  if (query.before) {
+  if (typeof query.before !== 'undefined') {
     // TODO: fix type error
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    storedEpisodes = storedEpisodes.and((episode) => episode.start_time < query.before!);
+    foundEpisodes = foundEpisodes.and((episode) => episode.start_time < query.before!);
   }
-  if (query.after) {
+  if (typeof query.after !== 'undefined') {
     // TODO: fix type error
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    storedEpisodes = storedEpisodes.and((episode) => episode.start_time > query.after!);
+    foundEpisodes = foundEpisodes.and((episode) => episode.start_time > query.after!);
+  }
+  if (typeof query.treatment_effectiveness !== 'undefined') {
+    foundEpisodes = foundEpisodes.and(
+      (episode) => episode.treatment_effectiveness === query.treatment_effectiveness,
+    );
+  }
+  if (typeof query.pain_level !== 'undefined') {
+    foundEpisodes = foundEpisodes.and((episode) => episode.pain_level === query.pain_level);
   }
 
-  if (order === 'asc') {
-    storedEpisodes = storedEpisodes.reverse();
+  if (order === 'desc') {
+    foundEpisodes = foundEpisodes.reverse();
   }
 
-  return loggbokDB.joinEpisodeRows(await storedEpisodes.sortBy(orderBy));
+  return loggbokDB.joinEpisodeRows(await foundEpisodes.sortBy(orderBy));
 };
-export default {
-  addEpisode,
-  editEpisode,
-  getEpisode,
-  queryEpisodes,
+
+const deleteEpisode = async (id: NotUndefined<Episode['id']>) => {
+  await loggbokDB.episodes.delete(id);
 };
+
+export { addEpisode, editEpisode, getEpisode, queryEpisodes, deleteEpisode };
