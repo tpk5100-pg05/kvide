@@ -49,7 +49,11 @@ const EpisodeItem = ({ episode, onClick }: { episode: Episode; onClick: (id: num
                   color={
                     TREATMENT_IMPROVEMENT_COLORS[episode.treatment_effectiveness?.valueOf() || 2]
                   }
-                  content={getTreatmentSymbol(episode.treatment_effectiveness)}
+                  content={
+                    episode.treatment_effectiveness
+                      ? getTreatmentSymbol(episode.treatment_effectiveness)
+                      : '?'
+                  }
                 />
               </Box>
             </FlexBox>
