@@ -4,6 +4,7 @@ import EpisodeItem from './components/EpisodeItem';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useEffect } from 'react';
 import useOrientation from '@/hooks/useOrientation';
+import { FlexBox } from '../styled';
 
 const EpisodeContainer = ({
   episodes,
@@ -33,6 +34,10 @@ const EpisodeContainer = ({
     }
   };
 
+  const onClickEpisode = (id: number) => {
+    console.log(`clicked episode: ${id}`);
+  };
+
   useEffect(() => {
     const element = document.getElementById('episode-container');
     if (onBottomScrolled && element && element.scrollHeight <= element.clientHeight) {
@@ -41,7 +46,10 @@ const EpisodeContainer = ({
   }, [episodes, onBottomScrolled]);
 
   return (
-    <>
+    <FlexBox
+      flexDirection={'column'}
+      sx={{ p: 1, height: '100%', width: '100%', alignItems: 'center' }}
+    >
       <Box sx={{ p: 1 }}></Box>
       <div
         id="episode-container"
@@ -54,7 +62,7 @@ const EpisodeContainer = ({
         onScroll={onScroll}
       >
         {episodes.map((episode, index) => (
-          <EpisodeItem key={index} episode={episode} />
+          <EpisodeItem key={index} episode={episode} onClick={onClickEpisode} />
         ))}
       </div>
       <Box sx={{ p: 1 }}></Box>
@@ -63,7 +71,7 @@ const EpisodeContainer = ({
           <AddCircleIcon fontSize="large" color="info" />
         </Button>
       </Box>
-    </>
+    </FlexBox>
   );
 };
 

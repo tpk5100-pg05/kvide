@@ -4,6 +4,13 @@ const Graph = () => {
   return (
     <Box>
       <Typography>Graph component placeholder</Typography>
+      <Typography>Graph component placeholder</Typography>
+      <Typography>Graph component placeholder</Typography>
+      <Typography>Graph component placeholder</Typography>
+      <Typography>Graph component placeholder</Typography>
+      <Typography>Graph component placeholder</Typography>
+      <Typography>Graph component placeholder</Typography>
+      <Typography>Graph component placeholder</Typography>
     </Box>
   );
 };
