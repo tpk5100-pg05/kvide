@@ -83,11 +83,18 @@ const queryEpisodes = async (
     storedEpisodes = storedEpisodes.reverse();
   }
 
+  if (query.limit) {
+    storedEpisodes = storedEpisodes.limit(query.limit);
+  }
+
   return loggbokDB.joinEpisodeRows(await storedEpisodes.sortBy(orderBy));
 };
-export default {
+
+const EpisdoeActions = {
   addEpisode,
   editEpisode,
   getEpisode,
   queryEpisodes,
 };
+
+export default EpisdoeActions;
