@@ -10,7 +10,10 @@ function Home() {
   const episodeIncrement = 10;
 
   const [fetchedEpisodes, setFetchedEpisodes] = useState(episodeIncrement);
-  const episodes = useLiveQuery(() => queryEpisodes({ limit: fetchedEpisodes }), [fetchedEpisodes]);
+  const episodes = useLiveQuery(
+    () => queryEpisodes({ limit: fetchedEpisodes }, 'desc'),
+    [fetchedEpisodes],
+  );
 
   const onBottomScrolled = useCallback(() => {
     setFetchedEpisodes(fetchedEpisodes + episodeIncrement);

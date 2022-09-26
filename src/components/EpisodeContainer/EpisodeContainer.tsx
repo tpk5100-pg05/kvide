@@ -3,6 +3,7 @@ import { Box, Button } from '@mui/material';
 import EpisodeItem from './components/EpisodeItem';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useEffect } from 'react';
+import useOrientation from '@/hooks/useOrientation';
 
 const EpisodeContainer = ({
   episodes,
@@ -13,6 +14,8 @@ const EpisodeContainer = ({
   onAddNewEpisode: () => void;
   onBottomScrolled?: () => void;
 }) => {
+  const isPortrait = useOrientation();
+
   const onScroll = (e: React.UIEvent<HTMLElement>) => {
     const target = e.target as HTMLElement;
     if (
@@ -46,6 +49,7 @@ const EpisodeContainer = ({
           overflowY: 'scroll',
           paddingRight: '1rem',
           paddingLeft: '1rem',
+          width: isPortrait ? '100%' : '60%',
         }}
         onScroll={onScroll}
       >

@@ -26,8 +26,22 @@ export class LoggbokDB extends Dexie {
   }
 
   async joinEpisodeRow(episode: EpisodeSchema): Promise<Episode> {
-    const medications = await this.medications.where('id').anyOf(episode.medicationIds).toArray();
-    const symptoms = await this.symptoms.where('id').anyOf(episode.symptomIds).toArray();
+    // const medications = await this.medications.where('id').anyOf(episode.medicationIds).toArray();
+    // const symptoms = await this.symptoms.where('id').anyOf(episode.symptomIds).toArray();
+
+    // for debugging purposes, REMEMEBER TO REMOVE
+    const symptoms = [
+      { id: 1, name: 'Headache' },
+      { id: 2, name: 'Nausea' },
+      { id: 3, name: 'Vomiting' },
+      { id: 4, name: 'Dizziness' },
+    ];
+
+    const medications = [
+      { id: 1, name: 'ibuprofen' },
+      { id: 2, name: 'paracetamol' },
+    ];
+
     return {
       id: episode.id,
       start_time: episode.start_time,
