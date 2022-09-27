@@ -60,10 +60,16 @@ const EpisodeItem = ({ episode, onClick }: { episode: Episode; onClick: (id: num
             <Box sx={{ flexGrow: 1 }}>
               <FlexBox flexDirection={'column'} sx={{ width: '100%', p: 1 }}>
                 <Box sx={{ borderBottom: 1 }}>
+                  <Typography variant={'subtitle1'} fontWeight={600}>
+                    Symptoms:{' '}
+                  </Typography>
                   <Typography variant="subtitle1" sx={{ width: '100%' }}>
                     {episode.symptoms.map((symptom) => symptom.name).join(', ')}
                   </Typography>
                 </Box>
+                <Typography variant={'subtitle1'} fontWeight={600}>
+                  Medications:{' '}
+                </Typography>
                 <Typography variant="subtitle1">
                   {episode.medications.map((medication) => medication.name).join(', ')}
                 </Typography>
