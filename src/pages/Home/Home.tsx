@@ -3,7 +3,6 @@ import Graph from '@/components/Graph';
 import Meta from '@/components/Meta';
 import { FlexBox } from '@/components/styled';
 import { queryEpisodes } from '@/store/episodes';
-import { Box } from '@mui/material';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useCallback, useState } from 'react';
 
@@ -11,14 +10,15 @@ function Home() {
   const episodeIncrement = 5;
 
   const [fetchedEpisodes, setFetchedEpisodes] = useState(episodeIncrement);
+
   const episodes = useLiveQuery(
     () => queryEpisodes({ limit: fetchedEpisodes }, 'desc'),
     [fetchedEpisodes],
   );
 
   const onBottomScrolled = useCallback(() => {
-    setFetchedEpisodes(fetchedEpisodes + episodeIncrement);
-  }, [setFetchedEpisodes, fetchedEpisodes]);
+    setFetchedEpisodes((prev) => prev + episodeIncrement);
+  }, [setFetchedEpisodes]);
 
   if (!episodes) {
     return null;
@@ -32,17 +32,16 @@ function Home() {
         sx={{ alignItems: 'center', height: '100%', width: '100%' }}
       >
         <Graph />
-        <Box flexGrow={1} sx={{ flexGrow: 1, height: '0%', width: '100%' }}>
-          {episodes && (
-            <EpisodeContainer
-              onBottomScrolled={onBottomScrolled}
-              episodes={episodes}
-              onAddNewEpisode={() => {
-                console.log('adding new episode');
-              }}
-            />
-          )}
-        </Box>
+        {episodes && (
+          <EpisodeContainer
+            onBottomScrolled={onBottomScrolled}
+            episodes={episodes}
+            onAddNewEpisode={() => {
+              console.log('adding new episode');
+            }}
+            showAddButton={true}
+          />
+        )}
       </FlexBox>
     </>
   );

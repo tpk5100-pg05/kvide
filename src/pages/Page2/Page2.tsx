@@ -11,8 +11,6 @@ import { TreatmentEffectiveness } from '@/store/types';
 function Page2() {
   const episodes = useLiveQuery(() => queryEpisodes());
 
-  console.log(episodes);
-
   const saveEpisode = async () => {
     try {
       await addEpisode({
