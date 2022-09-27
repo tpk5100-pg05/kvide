@@ -21,10 +21,10 @@ const routes: Routes = {
     title: 'Page 1',
     icon: GitHubIcon,
   },
-  [Pages.Page2]: {
-    component: asyncComponentLoader(() => import('@/pages/Page2')),
-    path: '/page-2',
-    title: 'Page 2',
+  [Pages.Episode]: {
+    component: asyncComponentLoader(() => import('@/pages/AddEpisode')),
+    path: '/add-episode',
+    title: 'Add episode',
     icon: AddTaskIcon,
   },
   [Pages.Page3]: {

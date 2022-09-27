@@ -8,10 +8,8 @@ import { FullSizeCenteredFlexBox } from '@/components/styled';
 import { addEpisode, queryEpisodes } from '@/store/episodes';
 import { TreatmentEffectiveness } from '@/store/types';
 
-function Page2() {
+function AddEpisode() {
   const episodes = useLiveQuery(() => queryEpisodes());
-
-  console.log(episodes);
 
   const saveEpisode = async () => {
     try {
@@ -49,4 +47,4 @@ function Page2() {
   );
 }
 
-export default Page2;
+export default AddEpisode;
