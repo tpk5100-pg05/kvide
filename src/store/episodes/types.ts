@@ -19,6 +19,8 @@ interface EpisodeQuery {
   medications?: NotUndefined<Symptom>['id'][];
 
   notes?: string;
+
+  limit?: number;
 }
 
 type EpisodeOrderBy = keyof Episode;

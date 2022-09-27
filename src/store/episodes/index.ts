@@ -93,6 +93,10 @@ const queryEpisodes = async (
     foundEpisodes = foundEpisodes.reverse();
   }
 
+  if (query.limit) {
+    foundEpisodes = foundEpisodes.limit(query.limit);
+  }
+
   return loggbokDB.joinEpisodeRows(await foundEpisodes.sortBy(orderBy));
 };
 

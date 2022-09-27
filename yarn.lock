@@ -3641,6 +3641,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.5":
+  version: 1.11.5
+  resolution: "dayjs@npm:1.11.5"
+  checksum: e3bbaa7b4883b31be4bf75a181f1447fbb19800c29b332852125aab96baeff3ac232dcba8b88c4ea17d3b636c99dac5fb9d1af4bb6ae26615698bbc4a852dffb
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -6577,6 +6584,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.26.0
     "@vitejs/plugin-react": ^1.3.2
     date-fns: ^2.29.3
+    dayjs: ^1.11.5
     dexie: ^3.2.2
     dexie-react-hooks: 1.0.7
     eslint: ^8.16.0
