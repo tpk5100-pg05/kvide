@@ -1,10 +1,10 @@
 import { EpisodeOrder, EpisodeOrderBy, EpisodeQuery } from './types';
 import { Episode, EpisodeInsertable, EpisodeUpdatable } from '@/store/types';
-import { EpisodeSchema, loggbokDB } from '@/store/loggbok-db';
+import { EpisodeSchema, EpisodeSchemaInsertable, loggbokDB } from '@/store/loggbok-db';
 import { NotUndefined } from '@/utils/not-undefined';
 
 const addEpisode = async (episode: EpisodeInsertable) => {
-  const episodeToCreate: EpisodeSchema = {
+  const episodeToCreate: EpisodeSchemaInsertable = {
     start_time: episode.start_time,
     end_time: episode.end_time,
     pain_level: episode.pain_level,
@@ -14,7 +14,7 @@ const addEpisode = async (episode: EpisodeInsertable) => {
     medicationIds: episode.medications.map((medication) => medication.id),
   };
 
-  const res = await loggbokDB.episodes.add(episodeToCreate);
+  const res = await loggbokDB.episodes.add(episodeToCreate as EpisodeSchema);
   const createdEpisode = await loggbokDB.episodes.get(res);
 
   if (!createdEpisode) {

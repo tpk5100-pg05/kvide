@@ -1,10 +1,10 @@
 import { Medication, MedicationInsertable, MedicationUpdatable } from '@/store/types';
-import { loggbokDB } from '@/store/loggbok-db';
+import { loggbokDB, MedicationSchema } from '@/store/loggbok-db';
 import { NotUndefined } from '@/utils/not-undefined';
 import { MedicationOrder, MedicationOrderBy, MedicationQuery } from '@/store/medications/types';
 
 const addMedication = async (medication: MedicationInsertable): Promise<Medication> => {
-  const res = await loggbokDB.medications.add({ name: medication.name });
+  const res = await loggbokDB.medications.add({ name: medication.name } as MedicationSchema);
   const createdMedication = await loggbokDB.medications.get(res);
 
   if (!createdMedication) {
@@ -42,7 +42,7 @@ const queryMedications = async (
       : loggbokDB.medications.where('id').anyOf(query.ids),
   );
 
-  if (typeof query.name_regex === 'undefined') {
+  if (typeof query.name_regex !== 'undefined') {
     foundMedications = foundMedications.and(
       (medication) => !!query.name_regex?.test(medication.name),
     );

@@ -1,15 +1,18 @@
 import Dexie, { Table } from 'dexie';
 import { Episode, Medication, Symptom } from '@/store/types';
-import { WithOptionalProperty } from '@/utils/with-optional-property';
 import { NotUndefined } from '@/utils/not-undefined';
 
-export type SymptomSchema = WithOptionalProperty<Symptom, 'id'>;
-export type MedicationSchema = WithOptionalProperty<Medication, 'id'>;
-export type EpisodeSchema = Partial<Pick<Episode, 'id'>> &
-  Omit<Episode, 'symptoms' | 'medications'> & {
-    symptomIds: NotUndefined<SymptomSchema['id']>[];
-    medicationIds: NotUndefined<MedicationSchema['id']>[];
-  };
+export type SymptomSchema = Symptom;
+export type SymptomSchemaInsertable = Omit<SymptomSchema, 'id'>;
+
+export type MedicationSchema = Medication;
+export type MedicationSchemaInsertable = Omit<MedicationSchema, 'id'>;
+
+export type EpisodeSchema = Omit<Episode, 'symptoms' | 'medications'> & {
+  symptomIds: NotUndefined<SymptomSchema['id']>[];
+  medicationIds: NotUndefined<MedicationSchema['id']>[];
+};
+export type EpisodeSchemaInsertable = Omit<EpisodeSchema, 'id'>;
 
 export class LoggbokDB extends Dexie {
   episodes!: Table<EpisodeSchema, NotUndefined<EpisodeSchema['id']>>;
@@ -41,6 +44,10 @@ export class LoggbokDB extends Dexie {
       { id: 1, name: 'ibuprofen' },
       { id: 2, name: 'paracetamol' },
     ];
+
+    if (!episode.id) {
+      throw new Error('Episode id is undefined, this should not happen');
+    }
 
     return {
       id: episode.id,

@@ -1,10 +1,10 @@
 import { Symptom, SymptomInsertable, SymptomUpdatable } from '@/store/types';
-import { loggbokDB } from '@/store/loggbok-db';
+import { loggbokDB, SymptomSchema } from '@/store/loggbok-db';
 import { NotUndefined } from '@/utils/not-undefined';
 import { SymptomOrder, SymptomOrderBy, SymptomQuery } from '@/store/symptoms/types';
 
 const addSymptom = async (symptom: SymptomInsertable) => {
-  const res = await loggbokDB.symptoms.add({ name: symptom.name });
+  const res = await loggbokDB.symptoms.add({ name: symptom.name } as SymptomSchema);
   const createdSymptom = await loggbokDB.symptoms.get(res);
 
   if (!createdSymptom) {
@@ -30,7 +30,7 @@ const getSymptom = async (id: NotUndefined<Symptom['id']>): Promise<Symptom> => 
 
 const querySymptoms = async (
   query: SymptomQuery = {},
-  order: SymptomOrder,
+  order: SymptomOrder = 'asc',
   orderBy: SymptomOrderBy = 'id',
 ) => {
   let foundSymptoms = await Promise.resolve(
@@ -39,7 +39,7 @@ const querySymptoms = async (
       : loggbokDB.symptoms.where('id').anyOf(query.ids),
   );
 
-  if (typeof query.name_regex === 'undefined') {
+  if (typeof query.name_regex !== 'undefined') {
     foundSymptoms = foundSymptoms.and((symptom) => !!query.name_regex?.test(symptom.name));
   }
 

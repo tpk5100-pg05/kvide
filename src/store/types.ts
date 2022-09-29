@@ -4,7 +4,7 @@ type AtomEffectParams = {
 };
 
 interface Episode {
-  id?: Readonly<number>;
+  id: Readonly<number>;
   start_time: Date;
   end_time?: Date;
   pain_level?: number;
@@ -28,7 +28,7 @@ type EpisodeInsertable = Omit<Episode, 'id' | 'symptoms' | 'medications'> & {
 type EpisodeUpdatable = Partial<Episode>;
 
 interface Symptom {
-  id?: Readonly<number>;
+  id: Readonly<number>;
   name: string;
 }
 
@@ -36,7 +36,7 @@ type SymptomInsertable = Omit<Symptom, 'id'>;
 type SymptomUpdatable = Partial<SymptomInsertable>;
 
 interface Medication {
-  id?: Readonly<number>;
+  id: Readonly<number>;
   name: string;
 }
 
