@@ -5,6 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import TerrainIcon from '@mui/icons-material/Terrain';
 import MedicationIcon from '@mui/icons-material/Medication';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import TuneIcon from '@mui/icons-material/Tune';
 
 import asyncComponentLoader from '@/utils/loader';
 
@@ -23,17 +24,25 @@ const routes: Routes = {
     title: 'History',
     icon: HistoryIcon,
   },
+  [Pages.Settings]: {
+    component: asyncComponentLoader(() => import('@/pages/Settings')),
+    path: '/settings',
+    title: 'Settings',
+    icon: TuneIcon,
+  },
   [Pages.Medications]: {
     component: asyncComponentLoader(() => import('@/pages/Medications')),
-    path: '/medications',
+    path: '/settings/medications',
     title: 'Medications',
     icon: MedicationIcon,
+    inSidebar: false,
   },
   [Pages.Symptoms]: {
     component: asyncComponentLoader(() => import('@/pages/Symptoms')),
-    path: '/symptoms',
+    path: '/settings/symptoms',
     title: 'Symptoms',
     icon: TextSnippetIcon,
+    inSidebar: false,
   },
   [Pages.Page2]: {
     component: asyncComponentLoader(() => import('@/pages/Page2')),
@@ -57,6 +66,6 @@ const routes: Routes = {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',
   },
-};
+} as const;
 
 export default routes;

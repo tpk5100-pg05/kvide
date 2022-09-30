@@ -55,7 +55,6 @@ function ItemListEditor({
           <ListItem
             key={item.id}
             divider={true}
-            sx={{ height: '6rem' }}
             secondaryAction={
               <>
                 {onItemEdited && (
@@ -80,7 +79,7 @@ function ItemListEditor({
               </>
             }
           >
-            <ListItemText primary={item.name} />
+            <ListItemText>{item.name}</ListItemText>
           </ListItem>
         ))}
       </List>
