@@ -27,7 +27,6 @@
     "@mui/material": "^5.8.1",
     "@mui/system": "^5.8.1",
     "@mui/utils": "^5.8.0",
-    "date-fns": "^2.29.3",
     "dayjs": "^1.11.5",
     "dexie": "^3.2.2",
     "dexie-react-hooks": "1.0.7",
