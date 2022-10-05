@@ -23,7 +23,7 @@ function Page2() {
           { id: 2, name: 'Nausea' },
           { id: 3, name: 'Vomiting' },
         ],
-        medications: [
+        treatments: [
           { id: 1, name: 'ibuprofen' },
           { id: 2, name: 'paracetamol' },
         ],

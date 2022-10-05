@@ -4,51 +4,46 @@ import ItemListEditor from '@/components/ItemListEditor';
 import { Item, ItemBodyOnly, ItemIdOnly } from '@/components/ItemListEditor/types';
 import Loading from '@/components/Loading';
 import useNotifications from '@/store/notifications';
-import {
-  addMedication,
-  deleteMedication,
-  editMedication,
-  queryMedications,
-} from '@/store/medications';
+import { addTreatment, deleteTreatment, editTreatment, queryTreatments } from '@/store/treatments';
 
-function Medications() {
+function Treatments() {
   const [, notifications] = useNotifications();
 
   const onItemCreated = async (item: ItemBodyOnly) => {
     try {
-      await addMedication(item);
-      notifications.push({ message: 'Medication added' });
+      await addTreatment(item);
+      notifications.push({ message: 'Treatment added' });
     } catch (e) {
-      notifications.push({ message: 'Failed to add medication' });
+      notifications.push({ message: 'Failed to add treatment' });
     }
   };
   const onItemEdited = async (item: Item) => {
     try {
-      await editMedication(item.id, item);
-      notifications.push({ message: 'Medication edited' });
+      await editTreatment(item.id, item);
+      notifications.push({ message: 'Treatment edited' });
     } catch (e) {
-      notifications.push({ message: 'Failed to edit medication' });
+      notifications.push({ message: 'Failed to edit treatment' });
     }
   };
   const onItemDeleted = async (item: ItemIdOnly) => {
     try {
-      await deleteMedication(item.id);
-      notifications.push({ message: 'Medication deleted' });
+      await deleteTreatment(item.id);
+      notifications.push({ message: 'Treatment deleted' });
     } catch (e) {
-      notifications.push({ message: 'Failed to delete medication' });
+      notifications.push({ message: 'Failed to delete treatment' });
     }
   };
 
-  const medications = useLiveQuery(() => queryMedications());
+  const treatments = useLiveQuery(() => queryTreatments());
 
   return (
     <>
-      <Meta title="Medications" />
-      <h1>Medications</h1>
-      {medications ? (
+      <Meta title="Treatments" />
+      <h1>Treatments</h1>
+      {treatments ? (
         <ItemListEditor
-          items={medications}
-          itemClass="medication"
+          items={treatments}
+          itemClass="treatment"
           onItemEdited={onItemEdited}
           onItemDeleted={onItemDeleted}
           onItemCreated={onItemCreated}
@@ -60,4 +55,4 @@ function Medications() {
   );
 }
 
-export default Medications;
+export default Treatments;

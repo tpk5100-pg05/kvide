@@ -14,7 +14,7 @@ function Settings(): JSX.Element {
       <h1>Settings</h1>
       <Box flexGrow={1} sx={{ flexGrow: 1, height: '100vh', width: '100%', overflowY: 'scroll' }}>
         <List>
-          {[Pages.Medications, Pages.Symptoms]
+          {[Pages.Treatments, Pages.Symptoms]
             .map((index) => routes[index])
             .map(({ path, title, icon: Icon }) => (
               <ListItem key={path}>

@@ -7,7 +7,7 @@ enum Pages {
   Home,
   History,
   Settings,
-  Medications,
+  Treatments,
   Symptoms,
   Page2,
   Page3,

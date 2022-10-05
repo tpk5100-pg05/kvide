@@ -3,7 +3,7 @@ import BugReportIcon from '@mui/icons-material/BugReport';
 import HistoryIcon from '@mui/icons-material/History';
 import HomeIcon from '@mui/icons-material/Home';
 import TerrainIcon from '@mui/icons-material/Terrain';
-import MedicationIcon from '@mui/icons-material/Medication';
+import TreatmentIcon from '@mui/icons-material/Medication';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import TuneIcon from '@mui/icons-material/Tune';
 
@@ -33,11 +33,11 @@ const routes: Routes = {
     icon: TuneIcon,
     inNavbar: true,
   },
-  [Pages.Medications]: {
-    component: asyncComponentLoader(() => import('@/pages/Medications')),
-    path: '/settings/medications',
-    title: 'Medications',
-    icon: MedicationIcon,
+  [Pages.Treatments]: {
+    component: asyncComponentLoader(() => import('@/pages/Treatments')),
+    path: '/settings/treatments',
+    title: 'Treatments',
+    icon: TreatmentIcon,
   },
   [Pages.Symptoms]: {
     component: asyncComponentLoader(() => import('@/pages/Symptoms')),
