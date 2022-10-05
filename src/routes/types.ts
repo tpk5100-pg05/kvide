@@ -19,7 +19,7 @@ type PathRouteCustomProps = {
   title?: string;
   component: FC;
   icon?: FC<SvgIconProps>;
-  inSidebar?: boolean;
+  inNavbar?: boolean;
 };
 
 type Routes = Record<Pages, PathRouteProps & PathRouteCustomProps>;
