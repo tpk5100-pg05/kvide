@@ -25,7 +25,7 @@ function Sidebar() {
     >
       <List sx={{ width: 250, pt: (theme) => `${theme.mixins.toolbar.minHeight}px` }}>
         {Object.values(routes)
-          .filter((route) => route.title)
+          .filter((route) => route.title && route.inNavbar)
           .map(({ path, title, icon: Icon }) => (
             <ListItem sx={{ p: 0 }} key={path}>
               <ListItemButton onClick={sidebarActions.close} component={Link} to={path}>

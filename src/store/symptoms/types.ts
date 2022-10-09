@@ -4,6 +4,7 @@ import { Symptom } from '../types';
 interface SymptomQuery {
   ids?: NotUndefined<Symptom['id']>[];
   name_regex?: RegExp;
+  deleted?: boolean;
 }
 
 type SymptomOrderBy = keyof Symptom;

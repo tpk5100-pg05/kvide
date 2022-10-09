@@ -68,10 +68,10 @@ const EpisodeItem = ({ episode, onClick }: { episode: Episode; onClick: (id: num
                   </Typography>
                 </Box>
                 <Typography variant={'subtitle1'} fontWeight={600}>
-                  Medications:{' '}
+                  Treatments:{' '}
                 </Typography>
                 <Typography variant="subtitle1">
-                  {episode.medications.map((medication) => medication.name).join(', ')}
+                  {episode.treatments.map((treatment) => treatment.name).join(', ')}
                 </Typography>
               </FlexBox>
             </Box>
