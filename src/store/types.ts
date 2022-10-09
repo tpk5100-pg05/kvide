@@ -30,6 +30,7 @@ type EpisodeUpdatable = Partial<Episode>;
 interface Symptom {
   id: Readonly<number>;
   name: string;
+  deleted?: boolean;
 }
 
 type SymptomInsertable = Omit<Symptom, 'id'>;
@@ -38,6 +39,7 @@ type SymptomUpdatable = Partial<SymptomInsertable>;
 interface Treatment {
   id: Readonly<number>;
   name: string;
+  deleted?: boolean;
 }
 
 type TreatmentInsertable = Omit<Treatment, 'id'>;

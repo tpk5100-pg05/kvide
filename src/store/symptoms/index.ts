@@ -39,6 +39,9 @@ const querySymptoms = async (
       : loggbokDB.symptoms.where('id').anyOf(query.ids),
   );
 
+  // filter out deleted symptoms
+  foundSymptoms = foundSymptoms.and((symptom) => !!symptom.deleted === !!query.deleted);
+
   if (typeof query.name_regex !== 'undefined') {
     foundSymptoms = foundSymptoms.and((symptom) => !!query.name_regex?.test(symptom.name));
   }
@@ -51,7 +54,14 @@ const querySymptoms = async (
 };
 
 const deleteSymptom = async (id: NotUndefined<Symptom['id']>) => {
-  await loggbokDB.symptoms.delete(id);
+  const isSymptomUsed = await loggbokDB.episodes.where('symptomIds').equals(id).count();
+
+  // soft delete if symptom is used in at least one episode
+  if (isSymptomUsed) {
+    await loggbokDB.symptoms.update(id, { deleted: true });
+  } else {
+    await loggbokDB.symptoms.delete(id);
+  }
 };
 
 export { addSymptom, editSymptom, getSymptom, querySymptoms, deleteSymptom };

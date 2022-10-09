@@ -39,6 +39,9 @@ const queryTreatments = async (
       : loggbokDB.treatments.where('id').anyOf(query.ids),
   );
 
+  // filter out deleted treatments
+  foundTreatments = foundTreatments.and((treatment) => !!treatment.deleted === !!query.deleted);
+
   if (typeof query.name_regex !== 'undefined') {
     foundTreatments = foundTreatments.and((treatment) => !!query.name_regex?.test(treatment.name));
   }
@@ -51,7 +54,14 @@ const queryTreatments = async (
 };
 
 const deleteTreatment = async (id: NotUndefined<Treatment['id']>) => {
-  await loggbokDB.treatments.delete(id);
+  const isTreatmentUsed = await loggbokDB.episodes.where('treatmentIds').equals(id).count();
+
+  // soft delete if treatment is used in at least one episode
+  if (isTreatmentUsed) {
+    await loggbokDB.treatments.update(id, { deleted: true });
+  } else {
+    await loggbokDB.treatments.delete(id);
+  }
 };
 
 export { addTreatment, editTreatment, getTreatment, queryTreatments, deleteTreatment };

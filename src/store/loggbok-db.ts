@@ -23,8 +23,8 @@ export class LoggbokDB extends Dexie {
     super('loggbok-dexieDb');
     this.version(2).stores({
       episodes: '++id, start_time, end_time, *symptomIds, *treatmentIds, notes',
-      treatments: '++id, &name',
-      symptoms: '++id, &name',
+      treatments: '++id, &name, deleted',
+      symptoms: '++id, &name, deleted',
     });
   }
 

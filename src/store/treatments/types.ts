@@ -4,6 +4,7 @@ import { NotUndefined } from '@/utils/not-undefined';
 interface TreatmentQuery {
   ids?: NotUndefined<Treatment['id']>[];
   name_regex?: RegExp;
+  deleted?: boolean;
 }
 
 type TreatmentOrderBy = keyof Treatment;
