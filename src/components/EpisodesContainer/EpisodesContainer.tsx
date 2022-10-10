@@ -4,8 +4,9 @@ import EpisodeItem from './components/EpisodeItem';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { FlexBox } from '../styled';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useNavigate } from 'react-router-dom';
 
-const EpisodeContainer = ({
+const EpisodesContainer = ({
   episodes,
   onAddNewEpisode,
   onBottomScrolled,
@@ -16,8 +17,13 @@ const EpisodeContainer = ({
   onBottomScrolled: () => void;
   showAddButton?: boolean;
 }) => {
+  const navigate = useNavigate();
+
   const onClickEpisode = (id: number) => {
-    console.log(`clicked episode: ${id}`);
+    // TODO: might want to do some sliding animation to new page here in the future,
+    // in which the page can be navigated back to
+    // We can show in modal on desktop
+    navigate(`/episode/${id}`);
   };
 
   return (
@@ -61,4 +67,4 @@ const EpisodeContainer = ({
   );
 };
 
-export default EpisodeContainer;
+export default EpisodesContainer;

@@ -9,9 +9,8 @@ enum Pages {
   Settings,
   Treatments,
   Symptoms,
-  Page2,
-  Page3,
-  Page4,
+  Episode,
+  EpisodeAdd,
   NotFound,
 }
 

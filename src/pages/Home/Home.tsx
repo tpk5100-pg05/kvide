@@ -1,15 +1,19 @@
-import EpisodeContainer from '@/components/EpisodeContainer';
+import EpisodesContainer from '@/components/EpisodesContainer';
 import Graph from '@/components/Graph';
 import Meta from '@/components/Meta';
 import { FlexBox } from '@/components/styled';
+import { routes } from '@/routes';
+import { Pages } from '@/routes/types';
 import { queryEpisodes } from '@/store/episodes';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const episodeIncrement = 5;
-
   const [fetchedEpisodes, setFetchedEpisodes] = useState(episodeIncrement);
+
+  const navigate = useNavigate();
 
   const episodes = useLiveQuery(
     () => queryEpisodes({ limit: fetchedEpisodes }, 'desc'),
@@ -33,11 +37,11 @@ function Home() {
       >
         <Graph />
         {episodes && (
-          <EpisodeContainer
+          <EpisodesContainer
             onBottomScrolled={onBottomScrolled}
             episodes={episodes}
             onAddNewEpisode={() => {
-              console.log('adding new episode');
+              navigate(routes[Pages.EpisodeAdd].path);
             }}
             showAddButton={true}
           />

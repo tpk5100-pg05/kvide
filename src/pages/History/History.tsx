@@ -3,7 +3,7 @@ import { FullSizeCenteredFlexBox } from '@/components/styled';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { queryEpisodes } from '@/store/episodes';
 import { useCallback, useState } from 'react';
-import EpisodeContainer from '@/components/EpisodeContainer';
+import EpisodesContainer from '@/components/EpisodesContainer';
 import { EpisodeOrder, EpisodeOrderBy } from '@/store/episodes/types';
 import Filters from './components/Filters';
 
@@ -46,7 +46,7 @@ function History() {
           sortOptions={['start_time', 'pain_level', 'treatment_effectiveness']}
           defaultOrderBy={'start_time'}
         />
-        {episodes && <EpisodeContainer onBottomScrolled={onBottomScrolled} episodes={episodes} />}
+        {episodes && <EpisodesContainer onBottomScrolled={onBottomScrolled} episodes={episodes} />}
       </FullSizeCenteredFlexBox>
     </>
   );

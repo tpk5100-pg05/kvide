@@ -14,6 +14,24 @@ interface Episode {
   notes?: string;
 }
 
+const createDefaultEpisode = (): Episode => {
+  const current_time = new Date();
+
+  const end_time = new Date();
+  end_time.setHours(end_time.getHours() + 1);
+
+  return {
+    id: -1,
+    start_time: current_time,
+    end_time: end_time,
+    pain_level: 1,
+    treatment_effectiveness: TreatmentEffectiveness.NO_IMPROVEMENT,
+    symptoms: [],
+    treatments: [],
+    notes: '',
+  };
+};
+
 const enum TreatmentEffectiveness {
   RELAPSE = 0,
   NO_IMPROVEMENT = 1,
@@ -58,4 +76,4 @@ export type {
   SymptomUpdatable,
 };
 
-export { TreatmentEffectiveness };
+export { TreatmentEffectiveness, createDefaultEpisode };
