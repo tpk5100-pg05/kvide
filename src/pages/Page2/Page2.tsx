@@ -11,17 +11,22 @@ import { TreatmentEffectiveness } from '@/store/types';
 function Page2() {
   const episodes = useLiveQuery(() => queryEpisodes());
 
-  console.log(episodes);
-
   const saveEpisode = async () => {
     try {
       await addEpisode({
         start_time: new Date(),
         end_time: new Date(),
         pain_level: 1,
-        treatment_effectiveness: TreatmentEffectiveness.RELAPSE,
-        symptoms: [],
-        medications: [],
+        treatment_effectiveness: TreatmentEffectiveness.GOOD_IMPROVEMENT,
+        symptoms: [
+          { id: 1, name: 'Headache' },
+          { id: 2, name: 'Nausea' },
+          { id: 3, name: 'Vomiting' },
+        ],
+        treatments: [
+          { id: 1, name: 'ibuprofen' },
+          { id: 2, name: 'paracetamol' },
+        ],
       });
     } catch (error) {
       console.log('could not add episode', error); // replace with actual error handling

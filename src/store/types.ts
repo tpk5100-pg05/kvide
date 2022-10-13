@@ -4,13 +4,13 @@ type AtomEffectParams = {
 };
 
 interface Episode {
-  id?: Readonly<number>;
+  id: Readonly<number>;
   start_time: Date;
   end_time?: Date;
   pain_level?: number;
   treatment_effectiveness?: TreatmentEffectiveness;
   symptoms: Symptom[];
-  medications: Medication[];
+  treatments: Treatment[];
   notes?: string;
 }
 
@@ -40,38 +40,40 @@ const enum TreatmentEffectiveness {
   GOOD_IMPROVEMENT = 3,
 }
 
-type EpisodeInsertable = Omit<Episode, 'id' | 'symptoms' | 'medications'> & {
+type EpisodeInsertable = Omit<Episode, 'id' | 'symptoms' | 'treatments'> & {
   symptoms: (Required<Pick<Symptom, 'id'>> & Partial<Pick<Symptom, 'name'>>)[];
-  medications: (Required<Pick<Medication, 'id'>> & Partial<Pick<Medication, 'name'>>)[];
+  treatments: (Required<Pick<Treatment, 'id'>> & Partial<Pick<Treatment, 'name'>>)[];
 };
 type EpisodeUpdatable = Partial<Episode>;
 
 interface Symptom {
-  id?: Readonly<number>;
+  id: Readonly<number>;
   name: string;
+  deleted?: boolean;
 }
 
 type SymptomInsertable = Omit<Symptom, 'id'>;
 type SymptomUpdatable = Partial<SymptomInsertable>;
 
-interface Medication {
-  id?: Readonly<number>;
+interface Treatment {
+  id: Readonly<number>;
   name: string;
+  deleted?: boolean;
 }
 
-type MedicationInsertable = Omit<Medication, 'id'>;
-type MedicationUpdatable = Partial<MedicationInsertable>;
+type TreatmentInsertable = Omit<Treatment, 'id'>;
+type TreatmentUpdatable = Partial<TreatmentInsertable>;
 
 export type {
   AtomEffectParams,
   Episode,
   EpisodeInsertable,
   EpisodeUpdatable,
-  Medication,
+  Treatment,
   SymptomInsertable,
-  MedicationUpdatable,
+  TreatmentUpdatable,
   Symptom,
-  MedicationInsertable,
+  TreatmentInsertable,
   SymptomUpdatable,
   PrintableEpisode,
   PrintableNotes,

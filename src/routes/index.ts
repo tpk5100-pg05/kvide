@@ -1,43 +1,70 @@
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import BugReportIcon from '@mui/icons-material/BugReport';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import HistoryIcon from '@mui/icons-material/History';
 import HomeIcon from '@mui/icons-material/Home';
 import TerrainIcon from '@mui/icons-material/Terrain';
+import TreatmentIcon from '@mui/icons-material/Medication';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import TuneIcon from '@mui/icons-material/Tune';
 
 import asyncComponentLoader from '@/utils/loader';
 
 import { Pages, Routes } from './types';
 
 const routes: Routes = {
-  [Pages.Welcome]: {
-    component: asyncComponentLoader(() => import('@/pages/Welcome')),
+  [Pages.Home]: {
+    component: asyncComponentLoader(() => import('@/pages/Home')),
     path: '/',
-    title: 'Welcome',
+    title: 'Home',
     icon: HomeIcon,
+    inNavbar: true,
   },
-  [Pages.Page1]: {
-    component: asyncComponentLoader(() => import('@/pages/Page1')),
-    path: '/page-1',
-    title: 'Page 1',
-    icon: GitHubIcon,
+  [Pages.History]: {
+    component: asyncComponentLoader(() => import('@/pages/History')),
+    path: '/history',
+    title: 'History',
+    icon: HistoryIcon,
+    inNavbar: true,
+  },
+  [Pages.Settings]: {
+    component: asyncComponentLoader(() => import('@/pages/Settings')),
+    path: '/settings',
+    title: 'Settings',
+    icon: TuneIcon,
+    inNavbar: true,
+  },
+  [Pages.Treatments]: {
+    component: asyncComponentLoader(() => import('@/pages/Treatments')),
+    path: '/settings/treatments',
+    title: 'Treatments',
+    icon: TreatmentIcon,
+  },
+  [Pages.Symptoms]: {
+    component: asyncComponentLoader(() => import('@/pages/Symptoms')),
+    path: '/settings/symptoms',
+    title: 'Symptoms',
+    icon: TextSnippetIcon,
   },
   [Pages.Page2]: {
     component: asyncComponentLoader(() => import('@/pages/Page2')),
     path: '/page-2',
     title: 'Page 2',
     icon: AddTaskIcon,
+    inNavbar: true,
   },
   [Pages.Page3]: {
     component: asyncComponentLoader(() => import('@/pages/Page3')),
     path: '/page-3',
     title: 'Page 3',
     icon: TerrainIcon,
+    inNavbar: true,
   },
   [Pages.Page4]: {
     component: asyncComponentLoader(() => import('@/pages/Page4')),
     path: '/page-4',
     title: 'Page 4',
     icon: BugReportIcon,
+    inNavbar: true,
   },
   [Pages.exportPDF]: {
     component: asyncComponentLoader(() => import('@/pages/exportPDF')),
@@ -49,6 +76,6 @@ const routes: Routes = {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',
   },
-};
+} as const;
 
 export default routes;

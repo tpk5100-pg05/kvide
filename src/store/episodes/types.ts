@@ -16,9 +16,11 @@ interface EpisodeQuery {
   pain_level?: Episode['pain_level'];
 
   symptoms?: NotUndefined<Symptom>['id'][];
-  medications?: NotUndefined<Symptom>['id'][];
+  treatments?: NotUndefined<Symptom>['id'][];
 
   notes?: string;
+
+  limit?: number;
 }
 
 type EpisodeOrderBy = keyof Episode;
