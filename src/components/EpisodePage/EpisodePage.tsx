@@ -74,7 +74,7 @@ const EpisodePage = ({
 
   return (
     <>
-      <FlexBox flexDirection={'column'} sx={{ width: '100%', alignItems: 'center', p: 5 }}>
+      <FlexBox flexDirection={'column'} sx={{ width: '100%', alignItems: 'center', p: 2 }}>
         <FlexBox flexDirection={'row'} sx={{ width: '100%' }}>
           <Button color="info" sx={{ cursor: 'pointer' }} onClick={() => navigate(-1)}>
             <ArrowBackIcon />

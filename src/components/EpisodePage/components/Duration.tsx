@@ -32,6 +32,7 @@ const Duration = ({
     return (
       <FlexBox>
         <MobileDateTimePicker
+          ampm={false}
           label="From"
           inputFormat="YYYY/MM/DD HH:mm"
           value={start}
@@ -40,6 +41,7 @@ const Duration = ({
         />
         <Box sx={{ p: 2 }}></Box>
         <MobileDateTimePicker
+          ampm={false}
           label="To"
           inputFormat="YYYY/MM/DD HH:mm"
           value={end}
