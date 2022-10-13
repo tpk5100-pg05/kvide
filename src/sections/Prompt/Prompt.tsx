@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 
 function Prompt(
-  props: { color: 'info' | 'primary' | 'secondary' | 'inherit' },
+  props: { color?: 'info' | 'primary' | 'secondary' | 'inherit' },
   ref: Ref<PromptRef>,
 ): JSX.Element {
   const [open, setOpen] = useState(false);
