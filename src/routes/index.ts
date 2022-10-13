@@ -39,6 +39,12 @@ const routes: Routes = {
     title: 'Page 4',
     icon: BugReportIcon,
   },
+  [Pages.exportPDF]: {
+    component: asyncComponentLoader(() => import('@/pages/exportPDF')),
+    path: '/page-5',
+    title: 'export PDF',
+    icon: BugReportIcon,
+  },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',
