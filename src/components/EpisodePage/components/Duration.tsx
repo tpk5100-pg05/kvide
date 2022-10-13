@@ -4,6 +4,8 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
 import { Box, TextField, Typography } from '@mui/material';
 import { useMemo } from 'react';
 import { Dayjs } from 'dayjs';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const Duration = ({
   isEdit,
@@ -50,10 +52,21 @@ const Duration = ({
 
   return (
     <FlexBox flexDirection={'column'} sx={{ alignItems: 'center', overflow: 'visible' }}>
-      <Typography variant="subtitle1">{days}</Typography>
-      <Typography variant="body2" noWrap={true}>
-        {time}
-      </Typography>
+      <Box>
+        <FlexBox>
+          <CalendarMonthIcon />
+
+          <Box sx={{ p: 1 }} />
+          <Typography variant="subtitle1">{days}</Typography>
+        </FlexBox>
+        <FlexBox>
+          <AccessTimeIcon />
+          <Box sx={{ p: 1 }} />
+          <Typography variant="subtitle1" noWrap={true}>
+            {time}
+          </Typography>
+        </FlexBox>
+      </Box>
     </FlexBox>
   );
 };
