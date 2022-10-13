@@ -1,7 +1,13 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 
 import { queryEpisodes } from '@/store/episodes';
-import { PrintableEpisode, PrintableNotes, TreatmentEffectiveness } from '@/store/types';
+import {
+  PrintableEpisode,
+  PrintableNotes,
+  Symptom,
+  Treatment,
+  TreatmentEffectiveness,
+} from '@/store/types';
 
 import React from 'react';
 import ReactToPrint from 'react-to-print';
@@ -38,8 +44,10 @@ function ExportPDF() {
           : episodes[i].treatment_effectiveness == TreatmentEffectiveness.GOOD_IMPROVEMENT
           ? 'G'
           : 'M',
-        medications: episodes[i].medications.map((m) => (m.name ? m.name : '?')).join(' '),
-        symptoms: episodes[i].symptoms.map((m) => (m.name ? m.name : '?')).join(' '),
+        medications: episodes[i].treatments
+          .map((m: Treatment) => (m.name ? m.name : '?'))
+          .join(' '),
+        symptoms: episodes[i].symptoms.map((m: Symptom) => (m.name ? m.name : '?')).join(' '),
         notes: '',
       };
 

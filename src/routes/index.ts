@@ -68,9 +68,10 @@ const routes: Routes = {
   },
   [Pages.exportPDF]: {
     component: asyncComponentLoader(() => import('@/pages/exportPDF')),
-    path: '/page-5',
+    path: '/exportPDF',
     title: 'export PDF',
     icon: BugReportIcon,
+    inNavbar: true,
   },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),

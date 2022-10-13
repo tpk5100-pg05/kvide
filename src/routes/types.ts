@@ -12,7 +12,7 @@ enum Pages {
   Page2,
   Page3,
   Page4,
-  exportPDF = 5,
+  exportPDF,
   NotFound,
 }
 
