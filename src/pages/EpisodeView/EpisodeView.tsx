@@ -17,9 +17,6 @@ const EpisodeView = () => {
     return queryEpisodes({ ids: [Number(id)] });
   }, [id]);
 
-  const episode = episodes?.[0];
-  console.log(episode);
-
   const onEpisodeChange = useCallback(
     async (episode: Episode) => {
       try {

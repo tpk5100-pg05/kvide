@@ -35,8 +35,6 @@ const editEpisode = async (id: NotUndefined<Episode['id']>, episode: EpisodeUpda
     symptomIds: episode.symptoms.map((symptom) => symptom.id),
     treatmentIds: episode.treatments.map((treatment) => treatment.id),
   };
-  console.log('episode DB update: ', episodeToEdit);
-
   await loggbokDB.episodes.update(id, episodeToEdit);
 };
 
