@@ -12,7 +12,7 @@ import MedicationIcon from '@mui/icons-material/Medication';
 import PainIndicator from '../Base/PainIndicator';
 import TreatmentEfficacyIndicator from '../Base/TreatmentEfficacyIndicator';
 import Level from './components/Level';
-import Description from './components/TreatmentEfficacyDescription';
+import Description from './components/Description';
 import { getPainLevelDescription, getTreatmentEfficacyDescription } from '@/constants/descriptions';
 import Duration from './components/Duration';
 import { Dayjs } from 'dayjs';
