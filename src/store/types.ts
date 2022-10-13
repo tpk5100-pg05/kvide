@@ -43,7 +43,7 @@ type EpisodeInsertable = Omit<Episode, 'id' | 'symptoms' | 'treatments'> & {
   symptoms: (Required<Pick<Symptom, 'id'>> & Partial<Pick<Symptom, 'name'>>)[];
   treatments: (Required<Pick<Treatment, 'id'>> & Partial<Pick<Treatment, 'name'>>)[];
 };
-type EpisodeUpdatable = Partial<Episode>;
+type EpisodeUpdatable = EpisodeInsertable;
 
 interface Symptom {
   id: Readonly<number>;

@@ -1,10 +1,23 @@
-import { Episode } from '@/store/types';
+import { addSymptom, querySymptoms } from '@/store/symptoms';
+import { Episode, Symptom, Treatment } from '@/store/types';
 import Edit from '@mui/icons-material/Edit';
+import SaveIcon from '@mui/icons-material/Save';
 import { Box, Button, Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { FlexBox } from '../styled';
-import PainLevel from './components/PainLevel';
-import Symptoms from './components/Symptoms';
+import ItemsView from './components/ItemsView';
+import { addTreatment, queryTreatments } from '@/store/treatments';
+import PsychologyAlt from '@mui/icons-material/PsychologyAlt';
+import MedicationIcon from '@mui/icons-material/Medication';
+import PainIndicator from '../Base/PainIndicator';
+import TreatmentEfficacyIndicator from '../Base/TreatmentEfficacyIndicator';
+import Level from './components/Level';
+import Description from './components/TreatmentEfficacyDescription';
+import { getPainLevelDescription, getTreatmentEfficacyDescription } from '@/constants/descriptions';
+import Duration from './components/Duration';
+import { Dayjs } from 'dayjs';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
 const EpisodePage = ({
   episode,
@@ -20,9 +33,38 @@ const EpisodePage = ({
   const [isEditing, setIsEditing] = useState(Boolean(add));
   const [updatedEpisode, setUpdatedEpisode] = useState(episode);
 
+  const navigate = useNavigate();
+
+  const onStartChange = useCallback((start: Dayjs | null) => {
+    if (start === null) {
+      return;
+    }
+
+    setUpdatedEpisode((prev) => ({ ...prev, start_time: start.toDate() }));
+  }, []);
+
+  const onEndChange = useCallback((end: Dayjs | null) => {
+    if (end === null) {
+      return;
+    }
+
+    setUpdatedEpisode((prev) => ({ ...prev, end_time: end.toDate() }));
+  }, []);
+
   const onPainLevelChange = useCallback((pain: number) => {
-    console.log('onPainLevelChange', pain);
     setUpdatedEpisode((prev) => ({ ...prev, pain_level: pain }));
+  }, []);
+
+  const onTreatmentEfficacyChange = useCallback((efficacy: number) => {
+    setUpdatedEpisode((prev) => ({ ...prev, treatment_effectiveness: efficacy }));
+  }, []);
+
+  const onSymptomsChange = useCallback((symptoms: Symptom[]) => {
+    setUpdatedEpisode((prev) => ({ ...prev, symptoms: symptoms }));
+  }, []);
+
+  const onTreatmentsChange = useCallback((treatments: Treatment[]) => {
+    setUpdatedEpisode((prev) => ({ ...prev, treatments: treatments }));
   }, []);
 
   const onSave = () => {
@@ -33,9 +75,68 @@ const EpisodePage = ({
   return (
     <>
       <FlexBox flexDirection={'column'} sx={{ width: '100%', alignItems: 'center', p: 5 }}>
+        <FlexBox flexDirection={'row'} sx={{ width: '100%' }}>
+          <Button color="info" sx={{ cursor: 'pointer' }} onClick={() => navigate(-1)}>
+            <ArrowBackIcon />
+          </Button>
+        </FlexBox>
         <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
           {title}
         </Typography>
+        <Duration
+          isEdit={isEditing}
+          start={updatedEpisode.start_time}
+          end={updatedEpisode.end_time || new Date()}
+          onStartChange={onStartChange}
+          onEndChange={onEndChange}
+        />
+        <Box sx={{ p: 2, width: '100%' }}></Box>
+        <Level
+          title={'Pain level'}
+          isEdit={isEditing}
+          steps={[1, 2, 3, 4, 5]}
+          level={episode.pain_level}
+          onChange={onPainLevelChange}
+          Indicator={PainIndicator}
+        >
+          <Description description={getPainLevelDescription(updatedEpisode.pain_level ?? -1)} />
+        </Level>
+        <Box sx={{ p: 2, width: '100%' }}></Box>
+        <ItemsView
+          isEdit={isEditing}
+          items={episode.symptoms}
+          icon={<PsychologyAlt sx={{ fontSize: 40 }} />}
+          onChange={onSymptomsChange}
+          onItemCreated={addSymptom}
+          itemClass="Symptom"
+          queryItems={querySymptoms}
+        />
+        <Box sx={{ p: 2, width: '100%' }}></Box>
+        <ItemsView
+          isEdit={isEditing}
+          items={episode.treatments}
+          icon={<MedicationIcon sx={{ fontSize: 40 }} />}
+          onChange={onTreatmentsChange}
+          onItemCreated={addTreatment}
+          itemClass="Treatment"
+          queryItems={queryTreatments}
+        />
+        <Box sx={{ p: 2, width: '100%' }}></Box>
+        <Level
+          title={'Treatment efficacy'}
+          isEdit={isEditing}
+          steps={[0, 1, 2, 3]}
+          level={episode.treatment_effectiveness?.valueOf()}
+          onChange={onTreatmentEfficacyChange}
+          Indicator={TreatmentEfficacyIndicator}
+        >
+          <Description
+            description={getTreatmentEfficacyDescription(
+              updatedEpisode.treatment_effectiveness ?? -1,
+            )}
+          />
+        </Level>
+        <Box sx={{ p: 2, width: '100%' }}></Box>
         {!isEditing ? (
           <Button
             onClick={() => setIsEditing(true)}
@@ -45,12 +146,10 @@ const EpisodePage = ({
             <Edit />
           </Button>
         ) : (
-          <Button onClick={onSave}>Save</Button>
+          <Button color="info" onClick={onSave} startIcon={<SaveIcon />}>
+            Save
+          </Button>
         )}
-        <Box sx={{ p: 2, width: '100%' }}></Box>
-        <PainLevel isEdit={isEditing} painLevel={episode.pain_level} onChange={onPainLevelChange} />
-        <Box sx={{ p: 2, width: '100%' }}></Box>
-        <Symptoms isEdit={isEditing} symptoms={episode.symptoms} />
       </FlexBox>
     </>
   );

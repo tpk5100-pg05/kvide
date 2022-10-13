@@ -1,12 +1,10 @@
 import { Episode } from '@/store/types';
 import { Box, Card, Typography } from '@mui/material';
 
-import { PAIN_COLORS, TREATMENT_IMPROVEMENT_COLORS } from '@/constants/colors';
-
 import dayjs from 'dayjs';
 import { FlexBox } from '@/components/styled';
-import { getTreatmentSymbol } from '@/constants/symbols';
-import RoundIcon from '@/components/Base/RoundIcon';
+import PainIndicator from '@/components/Base/PainIndicator';
+import TreatmentEfficacyIndicator from '@/components/Base/TreatmentEfficacyIndicator';
 
 /**
  * Format a start and end date to a day, e.g Feb 26 - Feb 27
@@ -40,22 +38,10 @@ const EpisodeItem = ({ episode, onClick }: { episode: Episode; onClick: (id: num
           <FlexBox sx={{ p: 1 }} flexDirection="row" alignItems={'center'}>
             <FlexBox sx={{ p: 1 }} flexDirection="column">
               <Box sx={{ p: 1 }}>
-                <RoundIcon
-                  color={PAIN_COLORS[episode.pain_level || 2]}
-                  content={`${episode.pain_level || '?'}`}
-                />
+                <PainIndicator level={episode.pain_level ?? -1} />
               </Box>
               <Box sx={{ p: 1 }}>
-                <RoundIcon
-                  color={
-                    TREATMENT_IMPROVEMENT_COLORS[episode.treatment_effectiveness?.valueOf() || 2]
-                  }
-                  content={
-                    episode.treatment_effectiveness
-                      ? getTreatmentSymbol(episode.treatment_effectiveness)
-                      : '?'
-                  }
-                />
+                <TreatmentEfficacyIndicator level={episode.treatment_effectiveness ?? -1} />
               </Box>
             </FlexBox>
             <Box sx={{ flexGrow: 1 }}>

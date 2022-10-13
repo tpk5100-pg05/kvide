@@ -2,12 +2,14 @@ import EpisodePage from '@/components/EpisodePage';
 import { routes } from '@/routes';
 import { Pages } from '@/routes/types';
 import { queryEpisodes, editEpisode } from '@/store/episodes';
+import useNotifications from '@/store/notifications';
 import { Episode } from '@/store/types';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EpisodeView = () => {
+  const [, notifications] = useNotifications();
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -15,12 +17,20 @@ const EpisodeView = () => {
     return queryEpisodes({ ids: [Number(id)] });
   }, [id]);
 
+  const episode = episodes?.[0];
+  console.log(episode);
+
   const onEpisodeChange = useCallback(
-    (episode: Episode) => {
-      console.log('onEpisodeChange', episode);
-      editEpisode(Number(id), episode);
+    async (episode: Episode) => {
+      try {
+        console.log('episodes changed in callback: ', episode);
+        await editEpisode(Number(id), episode);
+        notifications.push({ message: 'Episode edited' });
+      } catch (e) {
+        notifications.push({ message: `Could not edit episode: ${e}` });
+      }
     },
-    [id],
+    [id, notifications],
   );
 
   if (!episodes) {
