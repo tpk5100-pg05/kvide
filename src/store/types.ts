@@ -14,6 +14,24 @@ interface Episode {
   notes?: string;
 }
 
+const createDefaultEpisode = (): Episode => {
+  const current_time = new Date();
+
+  const end_time = new Date();
+  end_time.setHours(end_time.getHours() + 1);
+
+  return {
+    id: -1,
+    start_time: current_time,
+    end_time: end_time,
+    pain_level: 1,
+    treatment_effectiveness: TreatmentEffectiveness.NO_IMPROVEMENT,
+    symptoms: [],
+    treatments: [],
+    notes: '',
+  };
+};
+
 interface PrintableEpisode {
   id: number;
   start_time: string;
@@ -44,7 +62,7 @@ type EpisodeInsertable = Omit<Episode, 'id' | 'symptoms' | 'treatments'> & {
   symptoms: (Required<Pick<Symptom, 'id'>> & Partial<Pick<Symptom, 'name'>>)[];
   treatments: (Required<Pick<Treatment, 'id'>> & Partial<Pick<Treatment, 'name'>>)[];
 };
-type EpisodeUpdatable = Partial<Episode>;
+type EpisodeUpdatable = EpisodeInsertable;
 
 interface Symptom {
   id: Readonly<number>;
@@ -79,4 +97,4 @@ export type {
   PrintableNotes,
 };
 
-export { TreatmentEffectiveness };
+export { TreatmentEffectiveness, createDefaultEpisode };

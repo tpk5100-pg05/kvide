@@ -3,7 +3,7 @@ import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from 
 import DefaultIcon from '@mui/icons-material/Deblur';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-import routes from '@/routes';
+import { routes } from '@/routes';
 import { Pages } from '@/routes/types';
 import Meta from '@/components/Meta';
 

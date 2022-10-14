@@ -8,7 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
-import routes from '@/routes';
+import { routes } from '@/routes';
 import useSidebar from '@/store/sidebar';
 
 function Sidebar() {

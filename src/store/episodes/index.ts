@@ -25,7 +25,17 @@ const addEpisode = async (episode: EpisodeInsertable) => {
 };
 
 const editEpisode = async (id: NotUndefined<Episode['id']>, episode: EpisodeUpdatable) => {
-  await loggbokDB.episodes.update(id, episode);
+  const episodeToEdit: EpisodeSchema = {
+    id: id,
+    start_time: episode.start_time,
+    end_time: episode.end_time,
+    pain_level: episode.pain_level,
+    treatment_effectiveness: episode.treatment_effectiveness,
+    notes: episode.notes,
+    symptomIds: episode.symptoms.map((symptom) => symptom.id),
+    treatmentIds: episode.treatments.map((treatment) => treatment.id),
+  };
+  await loggbokDB.episodes.update(id, episodeToEdit);
 };
 
 const getEpisode = async (id: NotUndefined<Episode['id']>) => {

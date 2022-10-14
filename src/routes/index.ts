@@ -1,8 +1,5 @@
-import AddTaskIcon from '@mui/icons-material/AddTask';
-import BugReportIcon from '@mui/icons-material/BugReport';
 import HistoryIcon from '@mui/icons-material/History';
 import HomeIcon from '@mui/icons-material/Home';
-import TerrainIcon from '@mui/icons-material/Terrain';
 import TreatmentIcon from '@mui/icons-material/Medication';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import TuneIcon from '@mui/icons-material/Tune';
@@ -10,6 +7,10 @@ import TuneIcon from '@mui/icons-material/Tune';
 import asyncComponentLoader from '@/utils/loader';
 
 import { Pages, Routes } from './types';
+
+const episodeRoute = (id: number) => {
+  return `/episode/${id}`;
+};
 
 const routes: Routes = {
   [Pages.Home]: {
@@ -45,26 +46,17 @@ const routes: Routes = {
     title: 'Symptoms',
     icon: TextSnippetIcon,
   },
-  [Pages.Page2]: {
-    component: asyncComponentLoader(() => import('@/pages/Page2')),
-    path: '/page-2',
-    title: 'Page 2',
-    icon: AddTaskIcon,
-    inNavbar: true,
+  [Pages.Episode]: {
+    path: '/episode/:id',
+    title: 'Episode',
+    component: asyncComponentLoader(() => import('@/pages/EpisodeView')),
+    inNavbar: false,
   },
-  [Pages.Page3]: {
-    component: asyncComponentLoader(() => import('@/pages/Page3')),
-    path: '/page-3',
-    title: 'Page 3',
-    icon: TerrainIcon,
-    inNavbar: true,
-  },
-  [Pages.Page4]: {
-    component: asyncComponentLoader(() => import('@/pages/Page4')),
-    path: '/page-4',
-    title: 'Page 4',
-    icon: BugReportIcon,
-    inNavbar: true,
+  [Pages.EpisodeAdd]: {
+    path: '/episode/add',
+    title: 'Add Episode',
+    component: asyncComponentLoader(() => import('@/pages/EpisodeAdd')),
+    inNavbar: false,
   },
   [Pages.exportPDF]: {
     component: asyncComponentLoader(() => import('@/pages/exportPDF')),
@@ -79,4 +71,4 @@ const routes: Routes = {
   },
 } as const;
 
-export default routes;
+export { routes, episodeRoute };

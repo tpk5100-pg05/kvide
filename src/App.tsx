@@ -1,5 +1,7 @@
 import { Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -15,15 +17,17 @@ import Sidebar from '@/sections/Sidebar';
 function App() {
   return (
     <Fragment>
-      <CssBaseline />
-      <Notifications />
-      <HotKeys />
-      <SW />
-      <BrowserRouter>
-        <Header />
-        <Sidebar />
-        <Pages />
-      </BrowserRouter>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <CssBaseline />
+        <Notifications />
+        <HotKeys />
+        <SW />
+        <BrowserRouter>
+          <Header />
+          <Sidebar />
+          <Pages />
+        </BrowserRouter>
+      </LocalizationProvider>
     </Fragment>
   );
 }
