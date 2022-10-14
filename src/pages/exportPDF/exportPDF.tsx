@@ -96,12 +96,14 @@ function ExportPDF() {
   return (
     <div>
       <Button onClick={handlePrint}>Print</Button>
-      <ComponentToPrint
-        ref={componentRef}
-        Heading="Event export"
-        episodes={printableEpisodes}
-        comments={comments}
-      />
+      <div style={{ display: 'None' }}>
+        <ComponentToPrint
+          ref={componentRef}
+          Heading="Event export"
+          episodes={printableEpisodes}
+          comments={comments}
+        />
+      </div>
     </div>
   );
 }

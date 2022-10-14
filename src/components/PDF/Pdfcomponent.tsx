@@ -9,20 +9,54 @@ class PDFEventTableEntry extends React.PureComponent<{ episode: PrintableEpisode
     return (
       <>
         <tr>
-          <th style={{ borderRight: '1px solid', borderTop: '2px solid' }}>{episode.date_time}</th>
-          <th style={{ borderRight: '1px solid', borderTop: '2px solid' }}>{episode.start_time}</th>
-          <th style={{ borderRight: '1px solid', borderTop: '2px solid' }}>{episode.pain_level}</th>
-          <th style={{ borderRight: '1px solid', borderTop: '2px solid' }}>{episode.symptoms}</th>
-          <th style={{ borderRight: '1px solid', borderTop: '2px solid' }}>{episode.notes}</th>
+          <th
+            style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
+          >
+            {episode.date_time}
+          </th>
+          <th
+            style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
+          >
+            {episode.start_time}
+          </th>
+          <th
+            style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
+          >
+            {episode.pain_level}
+          </th>
+          <th
+            style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
+          >
+            {episode.symptoms}
+          </th>
+          <th
+            style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
+          >
+            {episode.notes}
+          </th>
         </tr>
         <tr>
-          <th style={{ borderRight: '1px solid' }}></th>
-          <th style={{ borderRight: '1px solid' }}>{episode.end_time}</th>
-          <th style={{ borderRight: '1px solid' }}></th>
-          <th style={{ borderRight: '1px solid', borderTop: '2px solid', fontStyle: 'oblique' }}>
+          <th style={{ borderRight: '1px solid black', color: 'black' }}></th>
+          <th style={{ borderRight: '1px solid black', color: 'black' }}>{episode.end_time}</th>
+          <th style={{ borderRight: '1px solid black', color: 'black' }}></th>
+          <th
+            style={{
+              borderRight: '1px solid black',
+              borderTop: '2px solid black',
+              fontStyle: 'oblique',
+              color: 'black',
+            }}
+          >
             {episode.medications}
           </th>
-          <th style={{ borderRight: '1px solid', borderTop: '2px solid', fontStyle: 'oblique' }}>
+          <th
+            style={{
+              borderRight: '1px solid black',
+              borderTop: '2px solid black',
+              fontStyle: 'oblique',
+              color: 'black',
+            }}
+          >
             {episode.treatment_effectiveness}
           </th>
         </tr>
@@ -37,10 +71,10 @@ class PDFEventCommentEntry extends React.PureComponent<{ comment: PrintableNotes
 
     return (
       <div>
-        <h4>
+        <h4 style={{ color: 'black' }}>
           {commentData.notesNum} at {commentData.date}
         </h4>
-        <p>{commentData.notes}</p>
+        <p style={{ color: 'black' }}>{commentData.notes}</p>
       </div>
     );
   }
@@ -70,29 +104,41 @@ export class ComponentToPrint extends React.PureComponent<{
         <div style={{ width: '100%' }}>
           <h2 style={{ color: 'black', textAlign: 'center' }}>{this.props.Heading}</h2>
         </div>
-        <table style={{ border: '2px solid', width: '100%', borderCollapse: 'collapse' }}>
+        <table style={{ border: '2px solid black', width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr>
-              <th style={{ borderRight: '1px solid' }}>Date</th>
-              <th style={{ borderRight: '1px solid' }}>Start</th>
-              <th style={{ borderRight: '2px solid' }}>Pain</th>
-              <th style={{ borderRight: '1px solid', borderBottom: '2px solid' }}>Symptons</th>
+              <th style={{ borderRight: '1px solid black', color: 'black' }}>Date</th>
+              <th style={{ borderRight: '1px solid black', color: 'black' }}>Start</th>
+              <th style={{ borderRight: '2px solid black', color: 'black' }}>Pain</th>
               <th
                 style={{
-                  borderRight: '1px solid',
-                  borderLeft: '2px solid',
-                  borderBottom: '2px solid',
+                  borderRight: '1px solid black',
+                  borderBottom: '2px solid black',
+                  color: 'black',
+                }}
+              >
+                Symptons
+              </th>
+              <th
+                style={{
+                  borderRight: '1px solid black',
+                  borderLeft: '2px solid black',
+                  borderBottom: '2px solid black',
                 }}
               >
                 Comment
               </th>
             </tr>
             <tr>
-              <th style={{ borderRight: '1px solid' }}></th>
-              <th style={{ borderRight: '1px solid' }}>End</th>
-              <th style={{ borderRight: '2px solid' }}>state</th>
-              <th style={{ borderRight: '1px solid', fontStyle: 'oblique' }}>Treatment executed</th>
-              <th style={{ border: '1px solid', fontStyle: 'oblique' }}>effect</th>
+              <th style={{ borderRight: '1px solid black', color: 'black' }}></th>
+              <th style={{ borderRight: '1px solid black', color: 'black' }}>End</th>
+              <th style={{ borderRight: '2px solid black', color: 'black' }}>state</th>
+              <th style={{ borderRight: '1px solid black', fontStyle: 'oblique', color: 'black' }}>
+                Treatment executed
+              </th>
+              <th style={{ border: '1px solid black', fontStyle: 'oblique', color: 'black' }}>
+                effect
+              </th>
             </tr>
           </thead>
           <tbody>
