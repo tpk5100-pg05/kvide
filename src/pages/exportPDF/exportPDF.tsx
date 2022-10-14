@@ -1,4 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks';
+import { useNavigate } from 'react-router-dom';
 
 import { queryEpisodes } from '@/store/episodes';
 import {
@@ -14,10 +15,13 @@ import ReactToPrint from 'react-to-print';
 
 import { ComponentToPrint } from '@/components/PDF/Pdfcomponent';
 
-function ExportPDF() {
-  const episodes = useLiveQuery(() => queryEpisodes());
+import { routes } from '@/routes';
+import { Pages } from '@/routes/types';
 
-  console.log(episodes);
+function ExportPDF() {
+  const navigate = useNavigate();
+
+  const episodes = useLiveQuery(() => queryEpisodes());
 
   const comments: PrintableNotes[] = [];
   const printableEpisodes: PrintableEpisode[] = [];
@@ -66,12 +70,12 @@ function ExportPDF() {
       printableEpisodes.push(printEpisode);
     }
   }
-  console.log('conv', printableEpisodes, comments);
   const componentRef = React.useRef(null);
 
   const handleAfterPrint = React.useCallback(() => {
     console.log('`onAfterPrint` called');
-  }, []);
+    navigate(routes[Pages.History].path);
+  }, [navigate]);
 
   const handleBeforePrint = React.useCallback(() => {
     console.log('`onBeforePrint` called');
