@@ -6,7 +6,7 @@ const title = 'Smerteboken';
 
 const email = 'haavasma@stud.ntnu.no';
 
-const repository = 'https://github.com/suren-atoyan/react-pwa';
+const repository = 'https://github.com/tpk5100-pg05/smerteboken';
 
 const messages = {
   app: {
