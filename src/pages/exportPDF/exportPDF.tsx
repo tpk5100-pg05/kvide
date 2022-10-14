@@ -94,7 +94,7 @@ function ExportPDF() {
 
     // Good
     return (
-      <button id="Useless print button" hidden="true">
+      <button id="Useless print button" hidden>
         Print using a Functional Component
       </button>
     );
