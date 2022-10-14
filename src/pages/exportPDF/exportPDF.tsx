@@ -1,5 +1,8 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useNavigate } from 'react-router-dom';
+import { useCallback, useMemo, useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import { Button } from '@mui/material';
 
 import { queryEpisodes } from '@/store/episodes';
 import {
@@ -10,9 +13,6 @@ import {
   TreatmentEffectiveness,
 } from '@/store/types';
 
-import React, { useEffect } from 'react';
-import ReactToPrint from 'react-to-print';
-
 import { ComponentToPrint } from '@/components/PDF/Pdfcomponent';
 
 import { routes } from '@/routes';
@@ -20,14 +20,17 @@ import { Pages } from '@/routes/types';
 
 function ExportPDF() {
   const navigate = useNavigate();
-
   const episodes = useLiveQuery(() => queryEpisodes());
+  const componentRef = useRef(null);
 
-  const comments: PrintableNotes[] = [];
-  const printableEpisodes: PrintableEpisode[] = [];
+  const [printableEpisodes, comments] = useMemo(() => {
+    const printableEpisodes: PrintableEpisode[] = [];
+    const comments: PrintableNotes[] = [];
 
-  //Prepare episodes
-  if (episodes) {
+    if (!episodes) {
+      return [[], []];
+    }
+
     for (let i = 0; i < episodes.length; i++) {
       if (!episodes[i]) continue;
 
@@ -69,54 +72,30 @@ function ExportPDF() {
       }
       printableEpisodes.push(printEpisode);
     }
-  }
-  const componentRef = React.useRef(null);
 
-  const handleAfterPrint = React.useCallback(() => {
+    return [printableEpisodes, comments];
+  }, [episodes]);
+
+  const handleAfterPrint = useCallback(() => {
     console.log('`onAfterPrint` called');
     navigate(routes[Pages.History].path);
   }, [navigate]);
 
-  const handleBeforePrint = React.useCallback(() => {
+  const handleBeforePrint = useCallback(() => {
     console.log('`onBeforePrint` called');
   }, []);
 
-  const reactToPrintContent = React.useCallback(() => {
-    return componentRef.current;
-  }, []);
-
-  const reactToPrintTrigger = React.useCallback(() => {
-    // NOTE: could just as easily return <SomeComponent />. Do NOT pass an `onClick` prop
-    // to the root node of the returned component as it will be overwritten.
-
-    // Bad: the `onClick` here will be overwritten by `react-to-print`
-    // return <button onClick={() => alert('This will not work')}>Print this out!</button>;
-
-    // Good
-    return (
-      <button id="Useless print button" hidden>
-        Print using a Functional Component
-      </button>
-    );
-  }, []);
-
-  useEffect(() => {
-    const button = document.getElementById('Useless print button');
-    if (button) {
-      button.click();
-    }
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: 'history exported by <AppName>',
+    onAfterPrint: handleAfterPrint,
+    onBeforePrint: handleBeforePrint,
+    removeAfterPrint: false,
   });
 
   return (
     <div>
-      <ReactToPrint
-        content={reactToPrintContent}
-        documentTitle="history exported by <AppName>"
-        onAfterPrint={handleAfterPrint}
-        onBeforePrint={handleBeforePrint}
-        removeAfterPrint={false}
-        trigger={reactToPrintTrigger}
-      />
+      <Button onClick={handlePrint}>Print</Button>
       <ComponentToPrint
         ref={componentRef}
         Heading="Event export"
