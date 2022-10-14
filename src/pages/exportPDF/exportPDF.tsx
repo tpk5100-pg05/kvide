@@ -114,7 +114,7 @@ function ExportPDF() {
         documentTitle="history exported by <AppName>"
         onAfterPrint={handleAfterPrint}
         onBeforePrint={handleBeforePrint}
-        removeAfterPrint
+        removeAfterPrint={false}
         trigger={reactToPrintTrigger}
       />
       <ComponentToPrint
