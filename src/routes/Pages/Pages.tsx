@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 
-import routes from '..';
+import { routes } from '..';
 import { getPageHeight } from './utils';
 import { FlexBox } from '@/components/styled';
 import useOrientation from '@/hooks/useOrientation';

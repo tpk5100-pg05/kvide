@@ -1,7 +1,7 @@
 const PAIN_COLORS = ['#00ff00', '#7AFF00', '#FFFF00', '#FF8000', '#ff0000'];
 
 const TREATMENT_IMPROVEMENT_COLORS = [
-  '#00ff00',
+  '#ff0000',
   '#7AFF00',
   '#FFFF00',
   '#FF8000',

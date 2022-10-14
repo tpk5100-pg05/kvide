@@ -1,7 +1,7 @@
 {
-  "name": "React PWA",
-  "short_name": "reactpwa",
-  "description": "Starter kit for modern web applications",
+  "name": "Smerteboken",
+  "short_name": "Smerteboken",
+  "description": "Pain tracker for migraines",
   "theme_color": "#ffffff",
   "icons": [
     {
