@@ -96,7 +96,7 @@ function ExportPDF() {
     <div>
       <ReactToPrint
         content={reactToPrintContent}
-        documentTitle="<AppName> history"
+        documentTitle="history exported by <AppName>"
         onAfterPrint={handleAfterPrint}
         onBeforePrint={handleBeforePrint}
         removeAfterPrint
@@ -104,7 +104,7 @@ function ExportPDF() {
       />
       <ComponentToPrint
         ref={componentRef}
-        Heading="MY heading"
+        Heading="Event export"
         episodes={printableEpisodes}
         comments={comments}
       />
