@@ -9,7 +9,7 @@ import {
   TreatmentEffectiveness,
 } from '@/store/types';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactToPrint from 'react-to-print';
 
 import { ComponentToPrint } from '@/components/PDF/Pdfcomponent';
@@ -89,8 +89,19 @@ function ExportPDF() {
     // return <button onClick={() => alert('This will not work')}>Print this out!</button>;
 
     // Good
-    return <button>Print using a Functional Component</button>;
+    return (
+      <button id="Useless print button" hidden="true">
+        Print using a Functional Component
+      </button>
+    );
   }, []);
+
+  useEffect(() => {
+    const button = document.getElementById('Useless print button');
+    if (button) {
+      button.click();
+    }
+  });
 
   return (
     <div>
