@@ -40,6 +40,7 @@
     "react-hotkeys-hook": "^3.4.6",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.3.0",
+    "react-to-print": "^2.14.7",
     "recoil": "^0.7.2"
   },
   "devDependencies": {

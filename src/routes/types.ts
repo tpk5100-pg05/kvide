@@ -9,6 +9,7 @@ enum Pages {
   Settings,
   Treatments,
   Symptoms,
+  exportPDF,
   Episode,
   EpisodeAdd,
   NotFound,

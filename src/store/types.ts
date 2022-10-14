@@ -32,6 +32,25 @@ const createDefaultEpisode = (): Episode => {
   };
 };
 
+interface PrintableEpisode {
+  id: number;
+  start_time: string;
+  date_time: string;
+  end_time: string;
+  pain_level: string;
+  treatment_effectiveness: string;
+  symptoms: string;
+  medications: string;
+  notes: string;
+}
+
+interface PrintableNotes {
+  notesNum: string;
+  id: number;
+  notes: string;
+  date: string;
+}
+
 const enum TreatmentEffectiveness {
   RELAPSE = 0,
   NO_IMPROVEMENT = 1,
@@ -74,6 +93,8 @@ export type {
   Symptom,
   TreatmentInsertable,
   SymptomUpdatable,
+  PrintableEpisode,
+  PrintableNotes,
 };
 
 export { TreatmentEffectiveness, createDefaultEpisode };

@@ -58,6 +58,13 @@ const routes: Routes = {
     component: asyncComponentLoader(() => import('@/pages/EpisodeAdd')),
     inNavbar: false,
   },
+  [Pages.exportPDF]: {
+    component: asyncComponentLoader(() => import('@/pages/exportPDF')),
+    path: '/exportPDF',
+    title: 'export PDF',
+    icon: HistoryIcon,
+    inNavbar: true,
+  },
   [Pages.NotFound]: {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',
