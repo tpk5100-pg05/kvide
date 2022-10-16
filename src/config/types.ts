@@ -2,7 +2,7 @@ import type { SnackbarProps } from 'notistack';
 
 type Notifications = {
   options: SnackbarProps;
-  maxSnack: number;
+  //maxSnack: number;
 };
 
 export type { Notifications };

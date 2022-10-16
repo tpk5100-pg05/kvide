@@ -1,5 +1,3 @@
-import isMobile from '@/utils/is-mobile';
-
 import type { Notifications } from './types';
 
 const title = 'Smerteboken';
@@ -31,13 +29,11 @@ const dateFormat = 'MMMM DD, YYYY';
 
 const notifications: Notifications = {
   options: {
-    anchorOrigin: {
-      vertical: 'bottom',
-      horizontal: 'left',
-    },
-    autoHideDuration: 6000,
+    //Adjust width of notification pop-ups
+    sx: { width: 0.8 },
+    autoHideDuration: 3000,
   },
-  maxSnack: isMobile ? 3 : 4,
+  //maxSnack: isMobile ? 3 : 4,
 };
 
 const loader = {

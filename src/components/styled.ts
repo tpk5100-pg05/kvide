@@ -15,4 +15,14 @@ const FullSizeCenteredFlexBox = styled(CenteredFlexBox)({
   height: '100%',
 });
 
-export { FlexBox, CenteredFlexBox, FullSizeCenteredFlexBox };
+const BorderedCenteredFlexBox = styled(CenteredFlexBox)({
+  tp: 4,
+  width: '80%',
+  border: '10px',
+  borderRadius: '20px',
+  borderColor: 'white',
+  backgroundColor: '#83577A',
+  opacity: 0.9,
+});
+
+export { FlexBox, CenteredFlexBox, FullSizeCenteredFlexBox, BorderedCenteredFlexBox };
