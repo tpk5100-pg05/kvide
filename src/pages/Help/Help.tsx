@@ -13,6 +13,29 @@ function Help() {
             to use this app.
           </p>
 
+          <p>
+            <h3> Home screen: </h3>
+            Create new chronic pain events by pushing the circular plus button. A log of your most
+            recent registered events will be visible, scroll to see previous instances.
+          </p>
+
+          <p>
+            <h3> Add new event: </h3>
+            Here you add new episodes, you can do the following:
+            <br></br>
+            Register a start and end time.
+            <br></br>
+            Grade the amount of pain from light (1) - Extreme (5).
+            <br></br>
+            Add symptoms from the registered Symptoms (Is found under settings then Symptoms).
+            <br></br>
+            Register which treatments were applied (Settings then Treatments).<br></br>
+            Register the efficiancy of the used treatments from:<br></br>
+            R: Relapse, N: No improvement or relapse, S: Some improvements, G: Good improvements.
+            <br></br>
+            Save button, to save and register the instance.
+          </p>
+
           <h3>History page:</h3>
           <p>
             On this page you can see the history of all your documented episodes, from the most

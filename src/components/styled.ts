@@ -21,7 +21,7 @@ const BorderedCenteredFlexBox = styled(CenteredFlexBox)({
   border: '10px',
   borderRadius: '20px',
   borderColor: 'white',
-  backgroundColor: '#83577A',
+  backgroundColor: '#6E4966',
   opacity: 0.9,
 });
 

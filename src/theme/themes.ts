@@ -40,7 +40,7 @@ const themes: Record<Themes, ThemeOptions> = {
       mode: 'light',
       background: {
         default: '#fafafa',
-        paper: '#fff',
+        paper: '#D4D4D4',
       },
       primary: {
         //this affects button color and font color
@@ -53,8 +53,8 @@ const themes: Record<Themes, ThemeOptions> = {
     palette: {
       mode: 'dark',
       background: {
-        default: '#111',
-        paper: '#171717',
+        default: '#2B2B2B',
+        paper: '#6E4966',
       },
       primary: {
         //This affects button color and font color
