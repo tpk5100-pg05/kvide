@@ -41,6 +41,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.3.0",
     "react-to-print": "^2.14.7",
+    "recharts": "^2.1.15",
     "recoil": "^0.7.2"
   },
   "devDependencies": {
