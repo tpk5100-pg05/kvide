@@ -60,7 +60,7 @@ const routes: Routes = {
   },
   [Pages.exportPDF]: {
     component: asyncComponentLoader(() => import('@/pages/ExportPDF')),
-    path: '/ExportPDF',
+    path: '/export',
     title: 'Export',
     icon: HistoryIcon,
     inNavbar: true,
