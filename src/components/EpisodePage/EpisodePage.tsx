@@ -2,7 +2,7 @@ import { addSymptom, querySymptoms } from '@/store/symptoms';
 import { Episode, Symptom, Treatment } from '@/store/types';
 import Edit from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { FlexBox } from '../styled';
 import ItemsView from './components/ItemsView';
@@ -21,9 +21,11 @@ import { useNavigate } from 'react-router-dom';
 
 const EpisodePage = ({
   episode,
+  title,
   onEpisodeSave,
   add = false,
 }: {
+  title?: string;
   episode: Episode;
   onEpisodeSave: (ep: Episode) => void;
   add?: boolean;
@@ -78,9 +80,11 @@ const EpisodePage = ({
             <ArrowBackIcon />
           </Button>
         </FlexBox>
-        {/* <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
-          {title}
-        </Typography> */}
+        {title && (
+          <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
+            {title}
+          </Typography>
+        )}
         <Duration
           isEdit={isEditing}
           start={updatedEpisode.start_time}

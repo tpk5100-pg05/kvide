@@ -38,9 +38,7 @@ const EpisodeView = () => {
     navigate(routes[Pages.NotFound].path);
   }
 
-  return (
-    <EpisodePage title={`Episode ${id}`} episode={episodes[0]} onEpisodeSave={onEpisodeChange} />
-  );
+  return <EpisodePage episode={episodes[0]} onEpisodeSave={onEpisodeChange} />;
 };
 
 export default EpisodeView;
