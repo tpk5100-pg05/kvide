@@ -18,14 +18,14 @@ const getTreatmentEfficacyDescription = (effectiveness: TreatmentEffectiveness):
 const getPainLevelDescription = (painLevel: number): string => {
   switch (painLevel) {
     case 1:
-      return 'No pain';
-    case 2:
       return 'Mild pain';
-    case 3:
+    case 1.5:
+      return 'Mild pain';
+    case 2:
       return 'Moderate pain';
-    case 4:
-      return 'Severe pain';
-    case 5:
+    case 2.5:
+      return 'Moderate pain';
+    case 3:
       return 'Extreme pain';
     default:
       return '?';

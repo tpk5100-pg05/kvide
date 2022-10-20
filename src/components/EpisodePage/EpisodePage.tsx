@@ -2,7 +2,7 @@ import { addSymptom, querySymptoms } from '@/store/symptoms';
 import { Episode, Symptom, Treatment } from '@/store/types';
 import Edit from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { FlexBox } from '../styled';
 import ItemsView from './components/ItemsView';
@@ -22,12 +22,10 @@ import { useNavigate } from 'react-router-dom';
 const EpisodePage = ({
   episode,
   onEpisodeSave,
-  title,
   add = false,
 }: {
   episode: Episode;
   onEpisodeSave: (ep: Episode) => void;
-  title: string;
   add?: boolean;
 }) => {
   const [isEditing, setIsEditing] = useState(Boolean(add));
@@ -80,9 +78,9 @@ const EpisodePage = ({
             <ArrowBackIcon />
           </Button>
         </FlexBox>
-        <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
+        {/* <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
           {title}
-        </Typography>
+        </Typography> */}
         <Duration
           isEdit={isEditing}
           start={updatedEpisode.start_time}
@@ -94,7 +92,8 @@ const EpisodePage = ({
         <Level
           title={'Pain level'}
           isEdit={isEditing}
-          steps={[1, 2, 3, 4, 5]}
+          step={0.5}
+          steps={[1, 1.5, 2, 2.5, 3]}
           level={episode.pain_level}
           onChange={onPainLevelChange}
           Indicator={PainIndicator}

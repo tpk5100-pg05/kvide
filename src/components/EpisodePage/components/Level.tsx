@@ -7,6 +7,7 @@ const Level = ({
   level,
   onChange,
   Indicator,
+  step = 1,
   steps,
   children,
 }: {
@@ -15,6 +16,7 @@ const Level = ({
   level: number | undefined;
   onChange: (newLevel: number) => void;
   Indicator: ({ level }: { level: number }) => JSX.Element;
+  step?: number;
   steps: number[];
   children?: JSX.Element;
 }) => {
@@ -31,7 +33,7 @@ const Level = ({
         <Typography variant="h6">{title}</Typography>
       </Box>
       <Slider
-        step={1}
+        step={step}
         min={steps[0]}
         max={steps[steps.length - 1]}
         defaultValue={level}
