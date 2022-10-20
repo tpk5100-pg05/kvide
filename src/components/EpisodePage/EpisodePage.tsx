@@ -12,6 +12,7 @@ import MedicationIcon from '@mui/icons-material/Medication';
 import PainIndicator from '../Base/PainIndicator';
 import TreatmentEfficacyIndicator from '../Base/TreatmentEfficacyIndicator';
 import Level from './components/Level';
+import Comment from './components/Comment';
 import Description from './components/Description';
 import { getPainLevelDescription, getTreatmentEfficacyDescription } from '@/constants/descriptions';
 import Duration from './components/Duration';
@@ -65,6 +66,10 @@ const EpisodePage = ({
 
   const onTreatmentsChange = useCallback((treatments: Treatment[]) => {
     setUpdatedEpisode((prev) => ({ ...prev, treatments: treatments }));
+  }, []);
+
+  const onCommentChange = useCallback((comment: string) => {
+    setUpdatedEpisode((prev) => ({ ...prev, notes: comment }));
   }, []);
 
   const onSave = () => {
@@ -136,6 +141,13 @@ const EpisodePage = ({
             )}
           />
         </Level>
+        <Box sx={{ p: 2, width: '100%' }}></Box>
+        <Comment
+          title={'Comments'}
+          isEdit={isEditing}
+          comment={episode.notes}
+          onCommentChange={onCommentChange}
+        />
         <Box sx={{ p: 2, width: '100%' }}></Box>
         {!isEditing ? (
           <Button
