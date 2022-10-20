@@ -31,20 +31,19 @@ function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="transparent" elevation={1} position="static">
+      <AppBar color="primary" elevation={1} position="static">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             <IconButton
               onClick={sidebarActions.toggle}
               size="large"
               edge="start"
-              color="info"
               aria-label="menu"
               sx={{ mr: 1 }}
             >
               <MenuIcon />
             </IconButton>
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation="vertical" flexItem sx={{ mr: '17px' }} />
 
             <Button onClick={returnHome} color="info">
               <HomeIcon sx={{ mt: -0.5, mr: 0.5 }} />
@@ -53,7 +52,7 @@ function Header() {
           </FlexBox>
           <FlexBox>
             <Tooltip title="Switch theme" arrow>
-              <IconButton color="info" edge="end" size="large" onClick={themeActions.toggle}>
+              <IconButton edge="end" size="large" onClick={themeActions.toggle}>
                 <ThemeIcon />
               </IconButton>
             </Tooltip>

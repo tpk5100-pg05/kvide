@@ -81,7 +81,7 @@ const EpisodePage = ({
     <>
       <FlexBox flexDirection={'column'} sx={{ width: '100%', alignItems: 'center', p: 2 }}>
         <FlexBox flexDirection={'row'} sx={{ width: '100%' }}>
-          <Button color="info" sx={{ cursor: 'pointer' }} onClick={() => navigate(-1)}>
+          <Button color="primary" sx={{ cursor: 'pointer' }} onClick={() => navigate(-1)}>
             <ArrowBackIcon />
           </Button>
         </FlexBox>
@@ -156,12 +156,12 @@ const EpisodePage = ({
           <Button
             onClick={() => setIsEditing(true)}
             style={{ cursor: 'hover', float: 'right' }}
-            color="info"
+            color="primary"
           >
-            <Edit />
+            <Edit /> <Typography sx={{ ml: 1 }}>Edit episode</Typography>
           </Button>
         ) : (
-          <Button color="info" onClick={onSave} startIcon={<SaveIcon />}>
+          <Button color="primary" onClick={onSave} startIcon={<SaveIcon />}>
             Save
           </Button>
         )}

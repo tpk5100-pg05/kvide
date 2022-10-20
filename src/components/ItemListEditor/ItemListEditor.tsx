@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { Box, IconButton, List, ListItem, ListItemText, SpeedDial } from '@mui/material';
+import { Box, Fab, IconButton, List, ListItem, ListItemText } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -87,13 +87,14 @@ function ItemListEditor({
       <Prompt ref={promptRef} />
 
       {onItemCreated && (
-        <SpeedDial
+        <Fab
           onClick={() => onAddClicked()}
-          ariaLabel={`create a new ${itemClass}`}
+          aria-label={`create a new ${itemClass}`}
           title={`create a new ${itemClass}`}
           sx={{ position: 'absolute', bottom: 16, right: 16 }}
-          icon={<AddIcon />}
-        ></SpeedDial>
+        >
+          <AddIcon />
+        </Fab>
       )}
     </Box>
   );
