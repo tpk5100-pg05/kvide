@@ -51,14 +51,14 @@ function Header() {
               onClick={returnHome}
               size="large"
               edge="start"
-              color="error"
+              color="info"
               aria-label="home"
               sx={{ mr: 1 }}
             >
               <HomeIcon />
             </IconButton>
 
-            <Button onClick={returnHome} color="error">
+            <Button onClick={returnHome} color="info">
               {title}
             </Button>
           </FlexBox>
