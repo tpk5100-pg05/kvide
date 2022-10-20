@@ -29,11 +29,8 @@ const dateFormat = 'MMMM DD, YYYY';
 
 const notifications: Notifications = {
   options: {
-    //Adjust width of notification pop-ups
-    sx: { width: 0.8 },
     autoHideDuration: 3000,
   },
-  //maxSnack: isMobile ? 3 : 4,
 };
 
 const loader = {
