@@ -38,7 +38,7 @@ const EpisodeItem = ({ episode, onClick }: { episode: Episode; onClick: (id: num
           <FlexBox sx={{ p: 1 }} flexDirection="row" alignItems={'center'}>
             <FlexBox sx={{ p: 1 }} flexDirection="column">
               <Box sx={{ p: 1 }}>
-                <PainIndicator level={episode.pain_level ?? -1} />
+                <PainIndicator level={episode.pain_level ?? -1} showAllLevels={true} />
               </Box>
               <Box sx={{ p: 1 }}>
                 <TreatmentEfficacyIndicator level={episode.treatment_effectiveness ?? -1} />

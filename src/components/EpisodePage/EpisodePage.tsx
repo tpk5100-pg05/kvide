@@ -21,13 +21,13 @@ import { useNavigate } from 'react-router-dom';
 
 const EpisodePage = ({
   episode,
-  onEpisodeSave,
   title,
+  onEpisodeSave,
   add = false,
 }: {
+  title?: string;
   episode: Episode;
   onEpisodeSave: (ep: Episode) => void;
-  title: string;
   add?: boolean;
 }) => {
   const [isEditing, setIsEditing] = useState(Boolean(add));
@@ -80,9 +80,11 @@ const EpisodePage = ({
             <ArrowBackIcon />
           </Button>
         </FlexBox>
-        <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
-          {title}
-        </Typography>
+        {title && (
+          <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
+            {title}
+          </Typography>
+        )}
         <Duration
           isEdit={isEditing}
           start={updatedEpisode.start_time}
@@ -94,7 +96,8 @@ const EpisodePage = ({
         <Level
           title={'Pain level'}
           isEdit={isEditing}
-          steps={[1, 2, 3, 4, 5]}
+          step={0.5}
+          steps={[1, 1.5, 2, 2.5, 3]}
           level={episode.pain_level}
           onChange={onPainLevelChange}
           Indicator={PainIndicator}
