@@ -12,6 +12,7 @@ import MedicationIcon from '@mui/icons-material/Medication';
 import PainIndicator from '../Base/PainIndicator';
 import TreatmentEfficacyIndicator from '../Base/TreatmentEfficacyIndicator';
 import Level from './components/Level';
+import Comment from './components/Comment';
 import Description from './components/Description';
 import { getPainLevelDescription, getTreatmentEfficacyDescription } from '@/constants/descriptions';
 import Duration from './components/Duration';
@@ -21,13 +22,13 @@ import { useNavigate } from 'react-router-dom';
 
 const EpisodePage = ({
   episode,
-  onEpisodeSave,
   title,
+  onEpisodeSave,
   add = false,
 }: {
+  title?: string;
   episode: Episode;
   onEpisodeSave: (ep: Episode) => void;
-  title: string;
   add?: boolean;
 }) => {
   const [isEditing, setIsEditing] = useState(Boolean(add));
@@ -67,6 +68,10 @@ const EpisodePage = ({
     setUpdatedEpisode((prev) => ({ ...prev, treatments: treatments }));
   }, []);
 
+  const onCommentChange = useCallback((comment: string) => {
+    setUpdatedEpisode((prev) => ({ ...prev, notes: comment }));
+  }, []);
+
   const onSave = () => {
     onEpisodeSave(updatedEpisode);
     setIsEditing(false);
@@ -80,9 +85,11 @@ const EpisodePage = ({
             <ArrowBackIcon />
           </Button>
         </FlexBox>
-        <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
-          {title}
-        </Typography>
+        {title && (
+          <Typography variant="h4" component="h1" sx={{ marginBottom: 2, display: 'inline-block' }}>
+            {title}
+          </Typography>
+        )}
         <Duration
           isEdit={isEditing}
           start={updatedEpisode.start_time}
@@ -94,7 +101,8 @@ const EpisodePage = ({
         <Level
           title={'Pain level'}
           isEdit={isEditing}
-          steps={[1, 2, 3, 4, 5]}
+          step={0.5}
+          steps={[1, 1.5, 2, 2.5, 3]}
           level={episode.pain_level}
           onChange={onPainLevelChange}
           Indicator={PainIndicator}
@@ -136,6 +144,13 @@ const EpisodePage = ({
             )}
           />
         </Level>
+        <Box sx={{ p: 2, width: '100%' }}></Box>
+        <Comment
+          title={'Comments'}
+          isEdit={isEditing}
+          comment={episode.notes}
+          onCommentChange={onCommentChange}
+        />
         <Box sx={{ p: 2, width: '100%' }}></Box>
         {!isEditing ? (
           <Button

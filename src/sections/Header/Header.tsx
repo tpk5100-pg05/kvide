@@ -1,4 +1,3 @@
-import GitHubIcon from '@mui/icons-material/GitHub';
 import ThemeIcon from '@mui/icons-material/InvertColors';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
@@ -11,7 +10,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 
 import { FlexBox } from '@/components/styled';
-import { repository, title } from '@/config';
+import { title } from '@/config';
 import useSidebar from '@/store/sidebar';
 import useTheme from '@/store/theme';
 
@@ -46,25 +45,12 @@ function Header() {
             </IconButton>
             <Divider orientation="vertical" flexItem sx={{ mr: '17px' }} />
 
-            <IconButton
-              onClick={returnHome}
-              size="large"
-              edge="start"
-              aria-label="home"
-              sx={{ mr: 1 }}
-            >
-              <HomeIcon />
-            </IconButton>
-
-            <Button onClick={returnHome}>{title}</Button>
+            <Button onClick={returnHome} color="info">
+              <HomeIcon sx={{ mt: -0.5, mr: 0.5 }} />
+              {title}
+            </Button>
           </FlexBox>
           <FlexBox>
-            <Tooltip title="It's open source" arrow>
-              <IconButton size="large" component="a" href={repository} target="_blank">
-                <GitHubIcon />
-              </IconButton>
-            </Tooltip>
-            <Divider orientation="vertical" flexItem />
             <Tooltip title="Switch theme" arrow>
               <IconButton edge="end" size="large" onClick={themeActions.toggle}>
                 <ThemeIcon />

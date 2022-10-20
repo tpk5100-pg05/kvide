@@ -1,4 +1,4 @@
-const PAIN_COLORS = ['#00ff00', '#7AFF00', '#FFFF00', '#FF8000', '#ff0000'];
+const PAIN_COLORS = ['#00ff00', '#FFFF00', '#ff0000'];
 
 const TREATMENT_IMPROVEMENT_COLORS = [
   '#ff0000',
