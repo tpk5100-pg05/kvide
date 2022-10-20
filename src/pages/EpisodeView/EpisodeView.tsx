@@ -20,7 +20,6 @@ const EpisodeView = () => {
   const onEpisodeChange = useCallback(
     async (episode: Episode) => {
       try {
-        console.log('episodes changed in callback: ', episode);
         await editEpisode(Number(id), episode);
         notifications.push({ message: 'Episode edited' });
       } catch (e) {
