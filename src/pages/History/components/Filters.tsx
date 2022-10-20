@@ -43,7 +43,7 @@ const Filters = ({
         ))}
       </TextField>
       <Button
-        color="info"
+        color="primary"
         onClick={() =>
           setEpisodeOrder((prev) => {
             if (prev === 'desc') {

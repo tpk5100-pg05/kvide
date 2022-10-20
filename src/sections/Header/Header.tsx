@@ -43,9 +43,9 @@ function Header() {
             >
               <MenuIcon />
             </IconButton>
-            <Divider orientation="vertical" flexItem sx={{ mr: '17px' }} />
+            <Divider orientation="vertical" flexItem />
 
-            <Button onClick={returnHome} color="info">
+            <Button onClick={returnHome}>
               <HomeIcon sx={{ mt: -0.5, mr: 0.5 }} />
               {title}
             </Button>
