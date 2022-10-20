@@ -1,12 +1,10 @@
-import isMobile from '@/utils/is-mobile';
-
 import type { Notifications } from './types';
 
 const title = 'Smerteboken';
 
 const email = 'haavasma@stud.ntnu.no';
 
-const repository = 'https://github.com/suren-atoyan/react-pwa';
+const repository = 'https://github.com/tpk5100-pg05/smerteboken';
 
 const messages = {
   app: {
@@ -31,13 +29,8 @@ const dateFormat = 'MMMM DD, YYYY';
 
 const notifications: Notifications = {
   options: {
-    anchorOrigin: {
-      vertical: 'bottom',
-      horizontal: 'left',
-    },
-    autoHideDuration: 6000,
+    autoHideDuration: 3000,
   },
-  maxSnack: isMobile ? 3 : 4,
 };
 
 const loader = {

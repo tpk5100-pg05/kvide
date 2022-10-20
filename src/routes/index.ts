@@ -69,6 +69,12 @@ const routes: Routes = {
     component: asyncComponentLoader(() => import('@/pages/NotFound')),
     path: '*',
   },
+  [Pages.Help]: {
+    path: '/Help',
+    title: 'Help',
+    component: asyncComponentLoader(() => import('@/pages/Help')),
+    inNavbar: true,
+  },
 } as const;
 
 export { routes, episodeRoute };

@@ -13,6 +13,7 @@ enum Pages {
   Episode,
   EpisodeAdd,
   NotFound,
+  Help,
 }
 
 type PathRouteCustomProps = {

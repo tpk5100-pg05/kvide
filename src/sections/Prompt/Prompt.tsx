@@ -1,4 +1,4 @@
-import { forwardRef, Ref, useImperativeHandle, useState } from 'react';
+import { forwardRef, Ref, useImperativeHandle, useState, KeyboardEvent } from 'react';
 import { PromptRef } from '@/sections/Prompt/types';
 import {
   Button,
@@ -40,11 +40,21 @@ function Prompt(
     },
   }));
 
+  const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onSubmit(value);
+    }
+  };
+
   return (
     <Dialog open={open}>
       <DialogTitle>{message}</DialogTitle>
       <DialogContent>
-        <TextField value={value} onChange={(event) => setValue(event.target.value)} />
+        <TextField
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          onKeyPress={onKeyPress}
+        />
       </DialogContent>
       <DialogActions>
         <Button color={props.color} onClick={() => onDismiss()}>
