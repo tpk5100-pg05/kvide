@@ -4872,6 +4872,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"font-color-contrast@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "font-color-contrast@npm:11.1.0"
+  checksum: 7c8af0690adc8ddfd8f3030bbce6d3345851fe78c0076fb5b3ab23568b241559fd2925f8923dc5e907faa4d49d79a03e5c04321b1551d04dbdd662a29857a968
+  languageName: node
+  linkType: hard
+
 "forwarded@npm:0.2.0":
   version: 0.2.0
   resolution: "forwarded@npm:0.2.0"
@@ -6918,6 +6925,7 @@ __metadata:
     eslint-plugin-react: ^7.30.0
     eslint-plugin-react-hooks: ^4.5.0
     firebase: ^9.10.0
+    font-color-contrast: ^11.1.0
     https-localhost: ^4.7.1
     husky: ^8.0.1
     is-mobile: ^3.1.1

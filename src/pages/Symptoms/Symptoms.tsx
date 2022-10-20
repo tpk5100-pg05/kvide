@@ -1,3 +1,4 @@
+import { Card } from '@mui/material';
 import { useLiveQuery } from 'dexie-react-hooks';
 import Meta from '@/components/Meta';
 import ItemListEditor from '@/components/ItemListEditor';
@@ -39,18 +40,20 @@ function Symptoms() {
   return (
     <>
       <Meta title="Symptoms" />
-      <h1>Symptoms</h1>
-      {symptoms ? (
-        <ItemListEditor
-          items={symptoms}
-          itemClass="symptom"
-          onItemEdited={onItemEdited}
-          onItemDeleted={onItemDeleted}
-          onItemCreated={onItemCreated}
-        />
-      ) : (
-        <Loading />
-      )}
+      <Card sx={{ mt: 3, mb: 3, pl: 5, pr: 5, width: '100%' }}>
+        <h1>Symptoms</h1>
+        {symptoms ? (
+          <ItemListEditor
+            items={symptoms}
+            itemClass="symptom"
+            onItemEdited={onItemEdited}
+            onItemDeleted={onItemDeleted}
+            onItemCreated={onItemCreated}
+          />
+        ) : (
+          <Loading />
+        )}
+      </Card>
     </>
   );
 }

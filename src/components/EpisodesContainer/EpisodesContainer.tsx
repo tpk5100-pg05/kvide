@@ -1,7 +1,7 @@
 import { Episode } from '@/store/types';
-import { Box, Button } from '@mui/material';
+import { Box, Fab } from '@mui/material';
 import EpisodeItem from './components/EpisodeItem';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddIcon from '@mui/icons-material/Add';
 import { FlexBox } from '../styled';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
@@ -54,13 +54,15 @@ const EpisodesContainer = ({
             ))}
           </InfiniteScroll>
         </div>
-        <Box sx={{ p: 1 }}></Box>
+
         {showAddButton && onAddNewEpisode && (
-          <Box sx={{ p: 1 }}>
-            <Button onClick={onAddNewEpisode}>
-              <AddCircleIcon fontSize="large" color="info" />
-            </Button>
-          </Box>
+          <Fab
+            color="primary"
+            onClick={onAddNewEpisode}
+            sx={{ position: 'absolute', bottom: 16, right: 16 }}
+          >
+            <AddIcon />
+          </Fab>
         )}
       </FlexBox>
     </Box>

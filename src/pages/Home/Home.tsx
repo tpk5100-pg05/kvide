@@ -12,7 +12,6 @@ import { EpisodesWeekGraph } from './sections/EpisodesWeekGraph';
 function Home() {
   const episodeIncrement = 5;
   const [fetchedEpisodes, setFetchedEpisodes] = useState(episodeIncrement);
-
   const navigate = useNavigate();
 
   const episodes = useLiveQuery(

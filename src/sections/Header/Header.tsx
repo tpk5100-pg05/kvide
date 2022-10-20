@@ -32,45 +32,41 @@ function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="transparent" elevation={1} position="static">
+      <AppBar color="primary" elevation={1} position="static">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             <IconButton
               onClick={sidebarActions.toggle}
               size="large"
               edge="start"
-              color="info"
               aria-label="menu"
               sx={{ mr: 1 }}
             >
               <MenuIcon />
             </IconButton>
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation="vertical" flexItem sx={{ mr: '17px' }} />
 
             <IconButton
               onClick={returnHome}
               size="large"
               edge="start"
-              color="info"
               aria-label="home"
               sx={{ mr: 1 }}
             >
               <HomeIcon />
             </IconButton>
 
-            <Button onClick={returnHome} color="info">
-              {title}
-            </Button>
+            <Button onClick={returnHome}>{title}</Button>
           </FlexBox>
           <FlexBox>
             <Tooltip title="It's open source" arrow>
-              <IconButton color="info" size="large" component="a" href={repository} target="_blank">
+              <IconButton size="large" component="a" href={repository} target="_blank">
                 <GitHubIcon />
               </IconButton>
             </Tooltip>
             <Divider orientation="vertical" flexItem />
             <Tooltip title="Switch theme" arrow>
-              <IconButton color="info" edge="end" size="large" onClick={themeActions.toggle}>
+              <IconButton edge="end" size="large" onClick={themeActions.toggle}>
                 <ThemeIcon />
               </IconButton>
             </Tooltip>

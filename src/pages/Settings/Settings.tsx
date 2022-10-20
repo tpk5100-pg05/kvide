@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Card, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import DefaultIcon from '@mui/icons-material/Deblur';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
@@ -11,8 +11,8 @@ function Settings(): JSX.Element {
   return (
     <>
       <Meta title="Settings" />
-      <h1>Settings</h1>
-      <Box flexGrow={1} sx={{ flexGrow: 1, height: '100vh', width: '100%', overflowY: 'scroll' }}>
+      <Card sx={{ mt: 3, mb: 3, pl: 5, pr: 5, width: '100%' }}>
+        <h1>Settings</h1>
         <List>
           {[Pages.Treatments, Pages.Symptoms]
             .map((index) => routes[index])
@@ -26,7 +26,7 @@ function Settings(): JSX.Element {
               </ListItem>
             ))}
         </List>
-      </Box>
+      </Card>
     </>
   );
 }
