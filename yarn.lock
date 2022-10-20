@@ -7083,7 +7083,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"recharts@npm:^2.1.15":
+"recharts@npm:2.1.15":
   version: 2.1.15
   resolution: "recharts@npm:2.1.15"
   dependencies:
@@ -7106,6 +7106,32 @@ __metadata:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 2f0be89eca6da8a6d899dac8676de145001353b6072b7853d3f04091c38604f80b241b4ef04d4b28268a95df4a8134b565a192077cb6a2903048fc90f19a5def
+  languageName: node
+  linkType: hard
+
+"recharts@patch:recharts@npm%3A2.1.15#./.yarn/patches/recharts-npm-2.1.15-e5510e187f.patch::locator=react-pwa%40workspace%3A.":
+  version: 2.1.15
+  resolution: "recharts@patch:recharts@npm%3A2.1.15#./.yarn/patches/recharts-npm-2.1.15-e5510e187f.patch::version=2.1.15&hash=b89725&locator=react-pwa%40workspace%3A."
+  dependencies:
+    "@types/d3-interpolate": ^2.0.0
+    "@types/d3-scale": ^3.0.0
+    "@types/d3-shape": ^2.0.0
+    classnames: ^2.2.5
+    d3-interpolate: ^2.0.0
+    d3-scale: ^3.0.0
+    d3-shape: ^2.0.0
+    eventemitter3: ^4.0.1
+    lodash: ^4.17.19
+    react-is: ^16.10.2
+    react-resize-detector: ^7.1.2
+    react-smooth: ^2.0.1
+    recharts-scale: ^0.4.4
+    reduce-css-calc: ^2.1.8
+  peerDependencies:
+    prop-types: ^15.6.0
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 48fe346257181a61e82e8def3224f4a58ee9a965d4403ab46628709cb010ab43570640524aba631f182a03a24d5a9cb0d4badf7ec600ac292c8967057e7ca018
   languageName: node
   linkType: hard
 
