@@ -25,7 +25,7 @@ const Comment = ({
             multiline
             rows={6}
             defaultValue={comment}
-            onBlur={(e: string) => onCommentChange(e.target.value)}
+            onBlur={(e) => onCommentChange(e.target.value)}
             variant="standard"
           />
         </FlexBox>
