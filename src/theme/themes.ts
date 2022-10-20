@@ -41,7 +41,7 @@ const darkTheme: ThemeOptions = {
   palette: {
     mode: 'dark',
     background: {
-      default: 'black',
+      default: '#000000',
     },
   },
 };

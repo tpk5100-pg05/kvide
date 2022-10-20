@@ -70,7 +70,7 @@ const routes: Routes = {
     path: '*',
   },
   [Pages.Help]: {
-    path: '/Help',
+    path: '/help',
     title: 'Help',
     component: asyncComponentLoader(() => import('@/pages/Help')),
     inNavbar: true,
