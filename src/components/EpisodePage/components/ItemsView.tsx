@@ -107,18 +107,18 @@ const ItemsView = ({
                     onClick={() => onSymptomChange(item.id)}
                   >
                     <Checkbox
-                      color="info"
+                      color="primary"
                       checked={itemsMap.has(item.id) && itemsMap.get(item.id)}
                     />
                     <Typography variant="subtitle1">{item.name}</Typography>
                   </FlexBox>
                 ))}
                 <FlexBox sx={{ width: '100%', alignItems: 'center', p: 1 }} flexDirection="column">
-                  <Button color="info" startIcon={<AddIcon />} onClick={onAddClicked}>
+                  <Button color="primary" startIcon={<AddIcon />} onClick={onAddClicked}>
                     {`Add ${itemClass}`}
                   </Button>
                 </FlexBox>
-                <Prompt ref={promptRef} color="info" />
+                <Prompt ref={promptRef} color="primary" />
               </>
             ) : (
               allItems
