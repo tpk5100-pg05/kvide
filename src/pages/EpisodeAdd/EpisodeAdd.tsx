@@ -15,7 +15,7 @@ const EpisodeAdd = () => {
       try {
         const insertedEpisode = await addEpisode(episode);
         notifications.push({ message: 'Added episode' });
-        navigate(episodeRoute(insertedEpisode.id));
+        navigate(episodeRoute(insertedEpisode.id), { replace: true });
       } catch (e) {
         // TODO: add severity parameter for determining the color of the notification, i.e infor, warning, error
         notifications.push({ message: `Could not add episode: ${e}` });
