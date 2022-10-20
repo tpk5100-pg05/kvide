@@ -1,0 +1,15 @@
+diff --git a/types/component/LabelList.d.ts b/types/component/LabelList.d.ts
+index fe4f8e8db9e91f1958f6a9df4bea8d4f2f54fe4a..fe7720de9f55c56ff3006d574701859aee99ff45 100644
+--- a/types/component/LabelList.d.ts
++++ b/types/component/LabelList.d.ts
+@@ -18,8 +18,8 @@ interface LabelListProps<T extends Data> {
+     angle?: number;
+     formatter?: Function;
+ }
+-export declare type Props<T> = SVGProps<SVGElement> & LabelListProps<T>;
+-export declare type ImplicitLabelListType<T> = boolean | ReactElement<SVGElement> | ((props: any) => ReactElement<SVGElement>) | Props<T>;
++export declare type Props<T extends Data> = SVGProps<SVGElement> & LabelListProps<T>;
++export declare type ImplicitLabelListType<T extends Data> = boolean | ReactElement<SVGElement> | ((props: any) => ReactElement<SVGElement>) | Props<T>;
+ export declare function LabelList<T extends Data>(props: Props<T>): JSX.Element;
+ export declare namespace LabelList {
+     var displayName: string;

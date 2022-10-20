@@ -1,5 +1,4 @@
 import EpisodesContainer from '@/components/EpisodesContainer';
-import Graph from '@/components/Graph';
 import Meta from '@/components/Meta';
 import { FlexBox } from '@/components/styled';
 import { routes } from '@/routes';
@@ -8,6 +7,7 @@ import { queryEpisodes } from '@/store/episodes';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { EpisodesWeekGraph } from './sections/EpisodesWeekGraph';
 
 function Home() {
   const episodeIncrement = 5;
@@ -35,7 +35,7 @@ function Home() {
         flexDirection={'column'}
         sx={{ alignItems: 'center', height: '100%', width: '100%' }}
       >
-        <Graph />
+        <EpisodesWeekGraph height={255} />
         {episodes && (
           <EpisodesContainer
             onBottomScrolled={onBottomScrolled}

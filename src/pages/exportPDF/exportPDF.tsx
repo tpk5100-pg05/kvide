@@ -1,7 +1,12 @@
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useCallback, useMemo, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useReactToPrint } from 'react-to-print';
-import { Button } from '@mui/material';
+import dayjs from 'dayjs';
+import { Button, Container, FormControl, InputLabel, MenuItem, Select, Stack } from '@mui/material';
+
+import { ComponentToPrint } from '@/components/PDF/Pdfcomponent';
+import Meta from '@/components/Meta';
 
 import { queryEpisodes } from '@/store/episodes';
 import {
@@ -12,16 +17,19 @@ import {
   TreatmentEffectiveness,
 } from '@/store/types';
 
-import { ComponentToPrint } from '@/components/PDF/Pdfcomponent';
-
-import { useNavigate } from 'react-router-dom';
 import { routes } from '@/routes';
 import { Pages } from '@/routes/types';
 
 function ExportPDF() {
   const navigate = useNavigate();
-  const episodes = useLiveQuery(() => queryEpisodes());
   const componentRef = useRef(null);
+
+  const [intervalFilter, setIntervalFilter] = useState(7);
+  const episodes = useLiveQuery(() => {
+    const now = dayjs();
+    const after = now.subtract(intervalFilter, 'day').toDate();
+    return intervalFilter > 0 ? queryEpisodes({ after }) : queryEpisodes();
+  }, [intervalFilter]);
 
   const [printableEpisodes, comments] = useMemo(() => {
     const printableEpisodes: PrintableEpisode[] = [];
@@ -33,8 +41,6 @@ function ExportPDF() {
 
     for (let i = 0; i < episodes.length; i++) {
       if (!episodes[i]) continue;
-
-      console.log(TreatmentEffectiveness.GOOD_IMPROVEMENT);
 
       const printEpisode: PrintableEpisode = {
         id: i,
@@ -77,25 +83,41 @@ function ExportPDF() {
   }, [episodes]);
 
   const handleAfterPrint = useCallback(() => {
-    console.log('`onAfterPrint` called');
     navigate(routes[Pages.History].path);
   }, [navigate]);
-
-  const handleBeforePrint = useCallback(() => {
-    console.log('`onBeforePrint` called');
-  }, []);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: 'history exported by <AppName>',
     onAfterPrint: handleAfterPrint,
-    onBeforePrint: handleBeforePrint,
     removeAfterPrint: false,
   });
 
   return (
-    <div>
-      <Button onClick={handlePrint}>Print</Button>
+    <>
+      <Meta title="Export PDF" />
+
+      <Container sx={{ paddingY: '1rem' }}>
+        <Stack>
+          <FormControl sx={{ flexGrow: 1, flex: 1 }}>
+            <InputLabel>Interval</InputLabel>
+            <Select
+              label="Interval"
+              value={intervalFilter}
+              onChange={(event) => setIntervalFilter(event.target.value as number)}
+            >
+              <MenuItem value={7}>last 7 days</MenuItem>
+              <MenuItem value={30}>last 30 days</MenuItem>
+              <MenuItem value={90}>last 90 days</MenuItem>
+              <MenuItem value={0}>since the dawn of time</MenuItem>
+            </Select>
+          </FormControl>
+          <Button variant="outlined" size="large" onClick={handlePrint}>
+            Export
+          </Button>
+        </Stack>
+      </Container>
+
       <div style={{ display: 'None' }}>
         <ComponentToPrint
           ref={componentRef}
@@ -104,7 +126,7 @@ function ExportPDF() {
           comments={comments}
         />
       </div>
-    </div>
+    </>
   );
 }
 
