@@ -106,10 +106,10 @@ function ExportPDF() {
               value={intervalFilter}
               onChange={(event) => setIntervalFilter(event.target.value as number)}
             >
-              <MenuItem value={7}>last 7 days</MenuItem>
-              <MenuItem value={30}>last 30 days</MenuItem>
-              <MenuItem value={90}>last 90 days</MenuItem>
-              <MenuItem value={0}>since the dawn of time</MenuItem>
+              <MenuItem value={7}>Last 7 days</MenuItem>
+              <MenuItem value={30}>Last 30 days</MenuItem>
+              <MenuItem value={90}>Last 90 days</MenuItem>
+              <MenuItem value={0}>Since the dawn of time</MenuItem>
             </Select>
           </FormControl>
           <Button variant="outlined" size="large" onClick={handlePrint}>

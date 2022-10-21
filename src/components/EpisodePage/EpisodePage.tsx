@@ -131,7 +131,7 @@ const EpisodePage = ({
         />
         <Box sx={{ p: 2, width: '100%' }}></Box>
         <Level
-          title={'Treatment efficacy'}
+          title={'Treatment efficiency'}
           isEdit={isEditing}
           steps={[0, 1, 2, 3]}
           level={episode.treatment_effectiveness?.valueOf()}
