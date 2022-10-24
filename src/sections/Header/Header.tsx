@@ -18,9 +18,11 @@ import { routes } from '@/routes';
 import { Pages } from '@/routes/types';
 
 import { useNavigate } from 'react-router-dom';
+import useOrientation from '@/hooks/useOrientation';
 
 function Header() {
   const navigate = useNavigate();
+  const isPortrait = useOrientation();
 
   const [, sidebarActions] = useSidebar();
   const [, themeActions] = useTheme();
@@ -34,15 +36,17 @@ function Header() {
       <AppBar color="primary" elevation={1} position="static">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
-            <IconButton
-              onClick={sidebarActions.toggle}
-              size="large"
-              edge="start"
-              aria-label="menu"
-              sx={{ mr: 1 }}
-            >
-              <MenuIcon />
-            </IconButton>
+            {!isPortrait && (
+              <IconButton
+                onClick={sidebarActions.toggle}
+                size="large"
+                edge="start"
+                aria-label="menu"
+                sx={{ mr: 1 }}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             <Divider orientation="vertical" flexItem />
 
             <Button onClick={returnHome}>

@@ -1,5 +1,5 @@
 import { addSymptom, querySymptoms } from '@/store/symptoms';
-import { Episode, Symptom, Treatment } from '@/store/types';
+import { Episode, Symptom, Treatment, Trigger } from '@/store/types';
 import Edit from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import { Box, Button, Typography } from '@mui/material';
@@ -8,6 +8,7 @@ import { FlexBox } from '../styled';
 import ItemsView from './components/ItemsView';
 import { addTreatment, queryTreatments } from '@/store/treatments';
 import PsychologyAlt from '@mui/icons-material/PsychologyAlt';
+import PsychologyIcon from '@mui/icons-material/Psychology';
 import MedicationIcon from '@mui/icons-material/Medication';
 import PainIndicator from '../Base/PainIndicator';
 import TreatmentEfficacyIndicator from '../Base/TreatmentEfficacyIndicator';
@@ -19,6 +20,7 @@ import Duration from './components/Duration';
 import { Dayjs } from 'dayjs';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import { addTrigger, queryTriggers } from '@/store/triggers';
 
 const EpisodePage = ({
   episode,
@@ -68,6 +70,10 @@ const EpisodePage = ({
     setUpdatedEpisode((prev) => ({ ...prev, treatments: treatments }));
   }, []);
 
+  const onTriggerChange = useCallback((trigger: Trigger[]) => {
+    setUpdatedEpisode((prev) => ({ ...prev, triggers: trigger }));
+  }, []);
+
   const onCommentChange = useCallback((comment: string) => {
     setUpdatedEpisode((prev) => ({ ...prev, notes: comment }));
   }, []);
@@ -109,6 +115,16 @@ const EpisodePage = ({
         >
           <Description description={getPainLevelDescription(updatedEpisode.pain_level ?? -1)} />
         </Level>
+        <Box sx={{ p: 2, width: '100%' }}></Box>
+        <ItemsView
+          isEdit={isEditing}
+          items={episode.triggers}
+          icon={<PsychologyIcon sx={{ fontSize: 40 }} />}
+          onChange={onTriggerChange}
+          onItemCreated={addTrigger}
+          itemClass="Trigger"
+          queryItems={queryTriggers}
+        />
         <Box sx={{ p: 2, width: '100%' }}></Box>
         <ItemsView
           isEdit={isEditing}

@@ -11,6 +11,7 @@ interface Episode {
   treatment_effectiveness?: TreatmentEffectiveness;
   symptoms: Symptom[];
   treatments: Treatment[];
+  triggers: Trigger[];
   notes?: string;
 }
 
@@ -28,6 +29,7 @@ const createDefaultEpisode = (): Episode => {
     treatment_effectiveness: TreatmentEffectiveness.NO_IMPROVEMENT,
     symptoms: [],
     treatments: [],
+    triggers: [],
     notes: '',
   };
 };
@@ -41,6 +43,7 @@ interface PrintableEpisode {
   treatment_effectiveness: string;
   symptoms: string;
   medications: string;
+  triggers: string;
   notes: string;
 }
 
@@ -82,6 +85,15 @@ interface Treatment {
 type TreatmentInsertable = Omit<Treatment, 'id'>;
 type TreatmentUpdatable = Partial<TreatmentInsertable>;
 
+interface Trigger {
+  id: Readonly<number>;
+  name: string;
+  deleted?: boolean;
+}
+
+type TriggerInsertable = Omit<Treatment, 'id'>;
+type TriggerUpdatable = Partial<TreatmentInsertable>;
+
 export type {
   AtomEffectParams,
   Episode,
@@ -92,6 +104,9 @@ export type {
   TreatmentUpdatable,
   Symptom,
   TreatmentInsertable,
+  Trigger,
+  TriggerInsertable,
+  TriggerUpdatable,
   SymptomUpdatable,
   PrintableEpisode,
   PrintableNotes,

@@ -13,11 +13,12 @@ function Pages() {
   return (
     <Box
       sx={{
-        height: (theme) => getPageHeight(theme),
+        height: (theme) => getPageHeight(theme, isPortrait),
         width: '100%',
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'auto',
       }}
     >
       <FlexBox

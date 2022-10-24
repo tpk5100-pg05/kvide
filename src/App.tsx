@@ -24,8 +24,8 @@ function App() {
         <SW />
         <BrowserRouter>
           <Header />
-          <Sidebar />
           <Pages />
+          <Sidebar />
         </BrowserRouter>
       </LocalizationProvider>
     </Fragment>
