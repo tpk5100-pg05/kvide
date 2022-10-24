@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -13,8 +13,12 @@ import HotKeys from '@/sections/HotKeys';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 import Sidebar from '@/sections/Sidebar';
+import { getPageHeight } from './routes/Pages/utils';
 
 function App() {
+  const [topBarHeight, setTopBarHeight] = useState(0);
+  const [botBarHeight, setBotBarHeight] = useState(0);
+
   return (
     <Fragment>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -23,9 +27,9 @@ function App() {
         <HotKeys />
         <SW />
         <BrowserRouter>
-          <Header />
-          <Pages />
-          <Sidebar />
+          <Header onHeightChange={setTopBarHeight} />
+          <Pages height={(theme) => getPageHeight(theme, topBarHeight, botBarHeight)} />
+          <Sidebar onHeightChange={setBotBarHeight} />
         </BrowserRouter>
       </LocalizationProvider>
     </Fragment>

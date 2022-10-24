@@ -11,14 +11,19 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { routes } from '@/routes';
 import useSidebar from '@/store/sidebar';
 import { Box, Tab, Tabs } from '@mui/material';
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useLayoutEffect, useRef, useState } from 'react';
 import useOrientation from '@/hooks/useOrientation';
 
-function Sidebar() {
+function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void }) {
   const [isSidebarOpen, sidebarActions] = useSidebar();
   const [selectedTab, setSelectedTab] = useState(0);
 
+  const tabRef = useRef<HTMLDivElement>(null);
   const isPortrait = useOrientation();
+
+  useLayoutEffect(() => {
+    onHeightChange(tabRef?.current?.clientHeight || 0);
+  }, [tabRef?.current?.clientHeight, onHeightChange]);
 
   const handleChange = (_: SyntheticEvent<Element, Event>, newTab: number) => {
     setSelectedTab(newTab);
@@ -33,9 +38,21 @@ function Sidebar() {
           bgcolor: 'background.paper',
           zIndex: 10000,
         }}
+        ref={tabRef}
       >
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} color={'divider'}>
-          <Tabs variant={'fullWidth'} value={selectedTab} onChange={handleChange}>
+        <Box
+          sx={{
+            borderBottom: 1,
+            bgcolor: 'background.paper',
+          }}
+          color={'divider'}
+        >
+          <Tabs
+            variant={'fullWidth'}
+            value={selectedTab}
+            onChange={handleChange}
+            sx={{ height: '70' }}
+          >
             {Object.values(routes)
               .filter((route) => route.title && route.inNavbar)
               .map(({ title, path, icon: Icon }) => (
@@ -44,7 +61,8 @@ function Sidebar() {
                   label={title}
                   component={Link}
                   to={path}
-                  icon={Icon ? <Icon /> : <DefaultIcon />}
+                  icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
+                  sx={{ fontSize: '0.5rem' }}
                 />
               ))}
           </Tabs>

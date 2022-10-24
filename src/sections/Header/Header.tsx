@@ -19,20 +19,26 @@ import { Pages } from '@/routes/types';
 
 import { useNavigate } from 'react-router-dom';
 import useOrientation from '@/hooks/useOrientation';
+import { useLayoutEffect, useRef } from 'react';
 
-function Header() {
+function Header({ onHeightChange }: { onHeightChange: (height: number) => void }) {
   const navigate = useNavigate();
   const isPortrait = useOrientation();
-
   const [, sidebarActions] = useSidebar();
   const [, themeActions] = useTheme();
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    onHeightChange(ref?.current?.clientHeight || 0);
+  }, [ref?.current?.clientHeight, onHeightChange]);
 
   function returnHome() {
     navigate(routes[Pages.Home].path);
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} ref={ref}>
       <AppBar color="primary" elevation={1} position="static">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
