@@ -15,6 +15,7 @@ import {
   Symptom,
   Treatment,
   TreatmentEffectiveness,
+  Trigger,
 } from '@/store/types';
 
 import { routes } from '@/routes';
@@ -61,6 +62,7 @@ function ExportPDF() {
           .map((m: Treatment) => (m.name ? m.name : '?'))
           .join(' '),
         symptoms: episodes[i].symptoms.map((m: Symptom) => (m.name ? m.name : '?')).join(' '),
+        triggers: episodes[i].triggers.map((m: Trigger) => (m.name ? m.name : '?')).join(' '),
         notes: '',
       };
 
