@@ -40,7 +40,7 @@ function Triggers() {
 
   return (
     <>
-      <Meta title="triggers" />
+      <Meta title="Triggers" />
       <Box sx={{ height: '100%', width: '100%', p: 2, position: 'relative' }}>
         <Card
           sx={{
@@ -49,7 +49,7 @@ function Triggers() {
             height: '100%',
           }}
         >
-          <h1>triggers</h1>
+          <h1>Triggers</h1>
           {triggers ? (
             <ItemListEditor
               items={triggers}
