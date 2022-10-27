@@ -3,21 +3,22 @@ import { Route, Routes } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
 import { routes } from '..';
-import { getPageHeight } from './utils';
 import { FlexBox } from '@/components/styled';
 import useOrientation from '@/hooks/useOrientation';
+import { Theme } from '@mui/material';
 
-function Pages() {
+function Pages({ height }: { height: (theme: Theme) => string }) {
   const isPortrait = useOrientation();
 
   return (
     <Box
       sx={{
-        height: (theme) => getPageHeight(theme),
+        height: height,
         width: '100%',
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'auto',
       }}
     >
       <FlexBox

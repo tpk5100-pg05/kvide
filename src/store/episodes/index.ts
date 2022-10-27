@@ -12,6 +12,7 @@ const addEpisode = async (episode: EpisodeInsertable) => {
     notes: episode.notes,
     symptomIds: episode.symptoms.map((symptom) => symptom.id),
     treatmentIds: episode.treatments.map((treatment) => treatment.id),
+    triggerIds: episode.triggers.map((trigger) => trigger.id),
   };
 
   const res = await loggbokDB.episodes.add(episodeToCreate as EpisodeSchema);
@@ -34,6 +35,7 @@ const editEpisode = async (id: NotUndefined<Episode['id']>, episode: EpisodeUpda
     notes: episode.notes,
     symptomIds: episode.symptoms.map((symptom) => symptom.id),
     treatmentIds: episode.treatments.map((treatment) => treatment.id),
+    triggerIds: episode.triggers.map((trigger) => trigger.id),
   };
   await loggbokDB.episodes.update(id, episodeToEdit);
 };

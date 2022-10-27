@@ -46,6 +46,12 @@ const routes: Routes = {
     title: 'Symptoms',
     icon: TextSnippetIcon,
   },
+  [Pages.Triggers]: {
+    component: asyncComponentLoader(() => import('@/pages/Triggers')),
+    path: '/settings/triggers',
+    title: 'Triggers',
+    icon: TextSnippetIcon,
+  },
   [Pages.Episode]: {
     path: '/episode/:id',
     title: 'Episode',

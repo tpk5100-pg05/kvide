@@ -1,4 +1,4 @@
-import { Card } from '@mui/material';
+import { Box, Card } from '@mui/material';
 import { useLiveQuery } from 'dexie-react-hooks';
 import Meta from '@/components/Meta';
 import ItemListEditor from '@/components/ItemListEditor';
@@ -40,20 +40,28 @@ function Treatments() {
   return (
     <>
       <Meta title="Treatments" />
-      <Card sx={{ mt: 3, mb: 3, pl: 5, pr: 5, width: '100%' }}>
-        <h1>Treatments</h1>
-        {treatments ? (
-          <ItemListEditor
-            items={treatments}
-            itemClass="treatment"
-            onItemEdited={onItemEdited}
-            onItemDeleted={onItemDeleted}
-            onItemCreated={onItemCreated}
-          />
-        ) : (
-          <Loading />
-        )}
-      </Card>
+      <Box sx={{ height: '100%', width: '100%', p: 2, position: 'relative' }}>
+        <Card
+          sx={{
+            p: 2,
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <h1>Treatments</h1>
+          {treatments ? (
+            <ItemListEditor
+              items={treatments}
+              itemClass="treatment"
+              onItemEdited={onItemEdited}
+              onItemDeleted={onItemDeleted}
+              onItemCreated={onItemCreated}
+            />
+          ) : (
+            <Loading />
+          )}
+        </Card>
+      </Box>
     </>
   );
 }

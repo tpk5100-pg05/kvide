@@ -1,45 +1,46 @@
-import { Box, Card } from '@mui/material';
+import { Card } from '@mui/material';
 import { useLiveQuery } from 'dexie-react-hooks';
 import Meta from '@/components/Meta';
 import ItemListEditor from '@/components/ItemListEditor';
 import { Item, ItemBodyOnly, ItemIdOnly } from '@/components/ItemListEditor/types';
 import Loading from '@/components/Loading';
 import useNotifications from '@/store/notifications';
-import { addSymptom, deleteSymptom, editSymptom, querySymptoms } from '@/store/symptoms';
+import { addTrigger, deleteTrigger, editTrigger, queryTriggers } from '@/store/triggers';
+import { Box } from '@mui/system';
 
-function Symptoms() {
+function Triggers() {
   const [, notifications] = useNotifications();
 
   const onItemCreated = async (item: ItemBodyOnly) => {
     try {
-      await addSymptom(item);
-      notifications.push({ message: 'Symptom added' });
+      await addTrigger(item);
+      notifications.push({ message: 'Trigger added' });
     } catch (e) {
-      notifications.push({ message: 'Failed to add symptom' });
+      notifications.push({ message: 'Failed to add trigger' });
     }
   };
   const onItemEdited = async (item: Item) => {
     try {
-      await editSymptom(item.id, item);
-      notifications.push({ message: 'Symptom edited' });
+      await editTrigger(item.id, item);
+      notifications.push({ message: 'Trigger edited' });
     } catch (e) {
-      notifications.push({ message: 'Failed to edit symptom' });
+      notifications.push({ message: 'Failed to edit trigger' });
     }
   };
   const onItemDeleted = async (item: ItemIdOnly) => {
     try {
-      await deleteSymptom(item.id);
-      notifications.push({ message: 'Symptom deleted' });
+      await deleteTrigger(item.id);
+      notifications.push({ message: 'trigger deleted' });
     } catch (e) {
-      notifications.push({ message: 'Failed to delete symptom' });
+      notifications.push({ message: 'Failed to delete trigger' });
     }
   };
 
-  const symptoms = useLiveQuery(() => querySymptoms());
+  const triggers = useLiveQuery(() => queryTriggers());
 
   return (
     <>
-      <Meta title="Symptoms" />
+      <Meta title="triggers" />
       <Box sx={{ height: '100%', width: '100%', p: 2, position: 'relative' }}>
         <Card
           sx={{
@@ -48,11 +49,11 @@ function Symptoms() {
             height: '100%',
           }}
         >
-          <h1>Symptoms</h1>
-          {symptoms ? (
+          <h1>triggers</h1>
+          {triggers ? (
             <ItemListEditor
-              items={symptoms}
-              itemClass="symptom"
+              items={triggers}
+              itemClass="trigger"
               onItemEdited={onItemEdited}
               onItemDeleted={onItemDeleted}
               onItemCreated={onItemCreated}
@@ -66,4 +67,4 @@ function Symptoms() {
   );
 }
 
-export default Symptoms;
+export default Triggers;

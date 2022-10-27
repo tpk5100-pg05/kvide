@@ -15,10 +15,12 @@ import {
   Symptom,
   Treatment,
   TreatmentEffectiveness,
+  Trigger,
 } from '@/store/types';
 
 import { routes } from '@/routes';
 import { Pages } from '@/routes/types';
+import { Box } from '@mui/system';
 
 function ExportPDF() {
   const navigate = useNavigate();
@@ -59,8 +61,9 @@ function ExportPDF() {
           : 'M',
         medications: episodes[i].treatments
           .map((m: Treatment) => (m.name ? m.name : '?'))
-          .join(' '),
-        symptoms: episodes[i].symptoms.map((m: Symptom) => (m.name ? m.name : '?')).join(' '),
+          .join(', '),
+        symptoms: episodes[i].symptoms.map((m: Symptom) => (m.name ? m.name : '?')).join(', '),
+        triggers: episodes[i].triggers.map((m: Trigger) => (m.name ? m.name : '?')).join(', '),
         notes: '',
       };
 
@@ -96,27 +99,35 @@ function ExportPDF() {
   return (
     <>
       <Meta title="Export PDF" />
-      <Card sx={{ mt: 3, mb: 3, pl: 5, pr: 5, width: '100%' }}>
-        <h1>Export PDF</h1>
-        <Stack sx={{ padding: 3 }}>
-          <FormControl sx={{ flexGrow: 1, flex: 1 }}>
-            <InputLabel>Interval</InputLabel>
-            <Select
-              label="Interval"
-              value={intervalFilter}
-              onChange={(event) => setIntervalFilter(event.target.value as number)}
-            >
-              <MenuItem value={7}>Last 7 days</MenuItem>
-              <MenuItem value={30}>Last 30 days</MenuItem>
-              <MenuItem value={90}>Last 90 days</MenuItem>
-              <MenuItem value={0}>Since the dawn of time</MenuItem>
-            </Select>
-          </FormControl>
-          <Button variant="outlined" size="large" onClick={handlePrint}>
-            Export
-          </Button>
-        </Stack>
-      </Card>
+      <Box sx={{ height: '100%', width: '100%', p: 2, position: 'relative' }}>
+        <Card
+          sx={{
+            p: 2,
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <h1>Export PDF</h1>
+          <Stack sx={{ padding: 3 }}>
+            <FormControl sx={{ flexGrow: 1, flex: 1 }}>
+              <InputLabel>Interval</InputLabel>
+              <Select
+                label="Interval"
+                value={intervalFilter}
+                onChange={(event) => setIntervalFilter(event.target.value as number)}
+              >
+                <MenuItem value={7}>Last 7 days</MenuItem>
+                <MenuItem value={30}>Last 30 days</MenuItem>
+                <MenuItem value={90}>Last 90 days</MenuItem>
+                <MenuItem value={0}>Since the dawn of time</MenuItem>
+              </Select>
+            </FormControl>
+            <Button variant="outlined" size="large" onClick={handlePrint}>
+              Export
+            </Button>
+          </Stack>
+        </Card>
+      </Box>
 
       <div style={{ display: 'None' }}>
         <ComponentToPrint

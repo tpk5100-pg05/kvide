@@ -1,9 +1,9 @@
 import type { Theme } from '@mui/material';
 
-function getPageHeight(theme: Theme) {
-  const topSpacing = Number(theme.mixins.toolbar.minHeight) + parseInt(theme.spacing(1));
+function getPageHeight(theme: Theme, topBarHeight = 0, bottomBarHeight = 0) {
+  const spacing = topBarHeight + bottomBarHeight;
 
-  return `calc(100vh - ${topSpacing}px)`;
+  return `calc(100vh - ${spacing}px)`;
 }
 
 export { getPageHeight };

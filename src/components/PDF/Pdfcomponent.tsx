@@ -15,14 +15,19 @@ class PDFEventTableEntry extends React.PureComponent<{ episode: PrintableEpisode
             {episode.date_time}
           </th>
           <th
-            style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
+            style={{ borderRight: '2px solid black', borderTop: '2px solid black', color: 'black' }}
           >
             {episode.start_time}
           </th>
           <th
-            style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
+            style={{ borderRight: '2px solid black', borderTop: '2px solid black', color: 'black' }}
           >
             {episode.pain_level}
+          </th>
+          <th
+            style={{ borderRight: '2px solid black', borderTop: '2px solid black', color: 'black' }}
+          >
+            {episode.triggers}
           </th>
           <th
             style={{ borderRight: '1px solid black', borderTop: '2px solid black', color: 'black' }}
@@ -37,7 +42,8 @@ class PDFEventTableEntry extends React.PureComponent<{ episode: PrintableEpisode
         </tr>
         <tr>
           <th style={{ borderRight: '1px solid black', color: 'black' }}></th>
-          <th style={{ borderRight: '1px solid black', color: 'black' }}>{episode.end_time}</th>
+          <th style={{ borderRight: '2px solid black', color: 'black' }}>{episode.end_time}</th>
+          <th style={{ borderRight: '2px solid black', color: 'black' }}></th>
           <th style={{ borderRight: '1px solid black', color: 'black' }}></th>
           <th
             style={{
@@ -110,6 +116,7 @@ export class ComponentToPrint extends React.PureComponent<{
               <th style={{ borderRight: '1px solid black', color: 'black' }}>Date</th>
               <th style={{ borderRight: '1px solid black', color: 'black' }}>Start</th>
               <th style={{ borderRight: '2px solid black', color: 'black' }}>Pain</th>
+              <th style={{ borderRight: '2px solid black', color: 'black' }}>Triggers</th>
               <th
                 style={{
                   borderRight: '1px solid black',
@@ -117,7 +124,7 @@ export class ComponentToPrint extends React.PureComponent<{
                   color: 'black',
                 }}
               >
-                Symptons
+                Symptoms
               </th>
               <th
                 style={{
@@ -133,6 +140,7 @@ export class ComponentToPrint extends React.PureComponent<{
               <th style={{ borderRight: '1px solid black', color: 'black' }}></th>
               <th style={{ borderRight: '1px solid black', color: 'black' }}>End</th>
               <th style={{ borderRight: '2px solid black', color: 'black' }}>state</th>
+              <th style={{ borderRight: '2px solid black', color: 'black' }}></th>
               <th style={{ borderRight: '1px solid black', fontStyle: 'oblique', color: 'black' }}>
                 Treatment executed
               </th>

@@ -30,7 +30,7 @@ const EpisodesContainer = ({
     <Box flexGrow={1} sx={{ flexGrow: 1, height: '0%', width: '100%' }}>
       <FlexBox
         flexDirection={'column'}
-        sx={{ height: '100%', width: '100%', alignItems: 'center' }}
+        sx={{ height: '100%', width: '100%', alignItems: 'center', position: 'relative' }}
       >
         <Box sx={{ p: 1 }}></Box>
         <div
