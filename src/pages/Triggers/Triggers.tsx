@@ -6,6 +6,7 @@ import { Item, ItemBodyOnly, ItemIdOnly } from '@/components/ItemListEditor/type
 import Loading from '@/components/Loading';
 import useNotifications from '@/store/notifications';
 import { addTrigger, deleteTrigger, editTrigger, queryTriggers } from '@/store/triggers';
+import { Box } from '@mui/system';
 
 function Triggers() {
   const [, notifications] = useNotifications();
@@ -40,20 +41,28 @@ function Triggers() {
   return (
     <>
       <Meta title="triggers" />
-      <Card sx={{ mt: 3, mb: 3, pl: 5, pr: 5, width: '100%' }}>
-        <h1>triggers</h1>
-        {triggers ? (
-          <ItemListEditor
-            items={triggers}
-            itemClass="trigger"
-            onItemEdited={onItemEdited}
-            onItemDeleted={onItemDeleted}
-            onItemCreated={onItemCreated}
-          />
-        ) : (
-          <Loading />
-        )}
-      </Card>
+      <Box sx={{ height: '100%', width: '100%', p: 2, position: 'relative' }}>
+        <Card
+          sx={{
+            p: 2,
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <h1>triggers</h1>
+          {triggers ? (
+            <ItemListEditor
+              items={triggers}
+              itemClass="trigger"
+              onItemEdited={onItemEdited}
+              onItemDeleted={onItemDeleted}
+              onItemCreated={onItemCreated}
+            />
+          ) : (
+            <Loading />
+          )}
+        </Card>
+      </Box>
     </>
   );
 }

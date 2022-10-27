@@ -49,8 +49,16 @@ function ItemListEditor({
   }, [items, compareFn]);
 
   return (
-    <Box flexGrow={1} sx={{ flexGrow: 1, height: '100vh', width: '100%', overflowY: 'scroll' }}>
-      <List sx={{ paddingBottom: '6rem' }}>
+    <Box
+      flexGrow={1}
+      sx={{
+        flexGrow: 1,
+        height: '100%',
+        width: '100%',
+        overflowY: 'scroll',
+      }}
+    >
+      <List sx={{}}>
         {sortedItems.map((item) => (
           <ListItem
             key={item.id}
@@ -88,7 +96,7 @@ function ItemListEditor({
 
       {onItemCreated && (
         <Fab
-          onClick={() => onAddClicked()}
+          onClick={onAddClicked}
           aria-label={`create a new ${itemClass}`}
           title={`create a new ${itemClass}`}
           sx={{ position: 'absolute', bottom: 16, right: 16 }}

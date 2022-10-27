@@ -11,12 +11,18 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { routes } from '@/routes';
 import useSidebar from '@/store/sidebar';
 import { Box, Tab, Tabs } from '@mui/material';
-import { SyntheticEvent, useLayoutEffect, useRef, useState } from 'react';
+import { SyntheticEvent, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOrientation from '@/hooks/useOrientation';
 
 function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void }) {
+  const initialTab: number = useMemo(() => {
+    const currentPath = window.location.pathname;
+    const currentTab = Object.entries(routes).findIndex(([, route]) => route.path === currentPath);
+    return currentTab;
+  }, []);
+
   const [isSidebarOpen, sidebarActions] = useSidebar();
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(initialTab);
 
   const tabRef = useRef<HTMLDivElement>(null);
   const isPortrait = useOrientation();
