@@ -43,21 +43,24 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
           bottom: '0px',
           bgcolor: 'background.paper',
           zIndex: 10000,
+          position: 'sticky',
         }}
         ref={tabRef}
       >
         <Box
           sx={{
-            borderBottom: 1,
+            borderBottom: 0,
+            width: '100%',
             bgcolor: 'background.paper',
           }}
           color={'divider'}
         >
           <Tabs
+            sx={{ width: '100%' }}
             variant={'fullWidth'}
             value={selectedTab}
             onChange={handleChange}
-            sx={{ height: '70' }}
+            centered
           >
             {Object.values(routes)
               .filter((route) => route.title && route.inNavbar)
@@ -67,8 +70,8 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
                   label={title}
                   component={Link}
                   to={path}
+                  sx={{ minWidth: '10px', fontSize: '0.5rem' }}
                   icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
-                  sx={{ fontSize: '0.5rem' }}
                 />
               ))}
           </Tabs>
