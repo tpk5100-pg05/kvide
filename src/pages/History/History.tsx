@@ -18,7 +18,7 @@ function History() {
 
   const episodes = useLiveQuery(
     () => queryEpisodes({ limit: fetchedEpisodes }, order, orderBy),
-    [fetchedEpisodes, order],
+    [fetchedEpisodes, order, orderBy],
   );
 
   const onBottomScrolled = useCallback(() => {
