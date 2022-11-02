@@ -96,10 +96,11 @@ function ItemListEditor({
 
       {onItemCreated && (
         <Fab
+          color="primary"
           onClick={onAddClicked}
           aria-label={`create a new ${itemClass}`}
           title={`create a new ${itemClass}`}
-          sx={{ position: 'absolute', bottom: 16, right: 16 }}
+          sx={{ position: 'absolute', bottom: 32, right: 32 }}
         >
           <AddIcon />
         </Fab>
