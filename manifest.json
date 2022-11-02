@@ -2,7 +2,7 @@
   "name": "Kvide",
   "short_name": "Kvide",
   "description": "Pain tracker for migraines",
-  "theme_color": "#ab47bc",
+  "theme_color": "#790e8b",
   "icons": [
     {
       "src": "/icon-192.png",
