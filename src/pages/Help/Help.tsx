@@ -5,7 +5,7 @@ function Help() {
   return (
     <>
       <Meta title="Help" />
-      <Card sx={{ mt: 3, mb: 3, pl: 5, pr: 5 }}>
+      <Card sx={{ mt: 3, mb: 3, pl: 5, pr: 5, overflow: 'scroll' }}>
         <h1>Help page: </h1>
         <p>
           Hi and welcome to the help page, hopefully this will explain everything you need to know

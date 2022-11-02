@@ -48,6 +48,14 @@ const EpisodeItem = ({ episode, onClick }: { episode: Episode; onClick: (id: num
               <FlexBox flexDirection={'column'} sx={{ width: '100%', p: 1 }}>
                 <Box sx={{ borderBottom: 1 }}>
                   <Typography variant={'subtitle1'} fontWeight={600}>
+                    Triggers:{' '}
+                  </Typography>
+                  <Typography variant="subtitle1" sx={{ width: '100%' }}>
+                    {episode.triggers.map((symptom) => symptom.name).join(', ')}
+                  </Typography>
+                </Box>
+                <Box sx={{ borderBottom: 1 }}>
+                  <Typography variant={'subtitle1'} fontWeight={600}>
                     Symptoms:{' '}
                   </Typography>
                   <Typography variant="subtitle1" sx={{ width: '100%' }}>

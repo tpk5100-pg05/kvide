@@ -7,6 +7,8 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { Item, ItemListEditorProps } from './types';
 import Prompt, { usePrompt } from '@/sections/Prompt';
+import { useRecoilState } from 'recoil';
+import { bottomHeight } from '@/state';
 
 ItemListEditor.defaultProps = {
   itemClass: 'item',
@@ -21,6 +23,7 @@ function ItemListEditor({
   onItemDeleted,
 }: ItemListEditorProps): JSX.Element {
   const [prompt, promptRef] = usePrompt();
+  const [bottom] = useRecoilState(bottomHeight);
 
   const onAddClicked = () => {
     if (!onItemCreated) return;
@@ -100,7 +103,7 @@ function ItemListEditor({
           onClick={onAddClicked}
           aria-label={`create a new ${itemClass}`}
           title={`create a new ${itemClass}`}
-          sx={{ position: 'absolute', bottom: 32, right: 32 }}
+          sx={{ position: 'fixed', bottom: 16 + bottom, right: 16 }}
         >
           <AddIcon />
         </Fab>

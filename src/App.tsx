@@ -14,10 +14,12 @@ import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 import Sidebar from '@/sections/Sidebar';
 import { getPageHeight } from './routes/Pages/utils';
+import { useRecoilState } from 'recoil';
+import { bottomHeight } from './state';
 
 function App() {
   const [topBarHeight, setTopBarHeight] = useState(0);
-  const [botBarHeight, setBotBarHeight] = useState(0);
+  const [botBarHeight, setBotBarHeight] = useRecoilState(bottomHeight);
 
   return (
     <Fragment>

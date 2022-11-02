@@ -5,6 +5,8 @@ import AddIcon from '@mui/icons-material/Add';
 import { FlexBox } from '../styled';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useNavigate } from 'react-router-dom';
+import { bottomHeight } from '@/state';
+import { useRecoilState } from 'recoil';
 
 const EpisodesContainer = ({
   episodes,
@@ -18,6 +20,7 @@ const EpisodesContainer = ({
   showAddButton?: boolean;
 }) => {
   const navigate = useNavigate();
+  const [bottom] = useRecoilState(bottomHeight);
 
   const onClickEpisode = (id: number) => {
     // TODO: might want to do some sliding animation to new page here in the future,
@@ -30,7 +33,7 @@ const EpisodesContainer = ({
     <Box flexGrow={1} sx={{ flexGrow: 1, height: '0%', width: '100%' }}>
       <FlexBox
         flexDirection={'column'}
-        sx={{ height: '100%', width: '100%', alignItems: 'center', position: 'relative' }}
+        sx={{ height: '100%', width: '100%', alignItems: 'center' }}
       >
         <Box sx={{ p: 1 }}></Box>
         <div
@@ -59,7 +62,7 @@ const EpisodesContainer = ({
           <Fab
             color="primary"
             onClick={onAddNewEpisode}
-            sx={{ position: 'absolute', bottom: 16, right: 16 }}
+            sx={{ position: 'fixed', bottom: 16 + bottom, right: 16 }}
           >
             <AddIcon />
           </Fab>
