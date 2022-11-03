@@ -21,14 +21,18 @@ function Pages() {
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'auto',
         pt: `${top}px`,
         pb: `${bottom}px`,
       }}
     >
       <FlexBox
         flexDirection={'column'}
-        sx={{ alignItems: 'center', height: '100%', width: isPortrait ? '100%' : '60%' }}
+        sx={{
+          alignItems: 'center',
+          height: '100%',
+          width: isPortrait ? '100%' : '60%',
+          overflow: 'auto',
+        }}
       >
         <Routes>
           {Object.values(routes).map(({ path, component: Component }) => {
