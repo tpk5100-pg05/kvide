@@ -10,7 +10,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 import { routes } from '@/routes';
 import useSidebar from '@/store/sidebar';
-import { Box, Tab, Tabs } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { SyntheticEvent, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOrientation from '@/hooks/useOrientation';
 
@@ -37,46 +37,28 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
 
   if (isPortrait) {
     return (
-      <Box
+      <BottomNavigation
         sx={{
           width: '100%',
-          bottom: '0px',
           bgcolor: 'background.paper',
-          zIndex: 10000,
-          position: 'static',
         }}
+        value={selectedTab}
+        onChange={handleChange}
         ref={tabRef}
       >
-        <Box
-          sx={{
-            borderBottom: 0,
-            width: '100%',
-            bgcolor: 'background.paper',
-          }}
-          color={'divider'}
-        >
-          <Tabs
-            sx={{ width: '100%' }}
-            variant={'fullWidth'}
-            value={selectedTab}
-            onChange={handleChange}
-            centered
-          >
-            {Object.values(routes)
-              .filter((route) => route.title && route.inNavbar)
-              .map(({ title, path, icon: Icon }) => (
-                <Tab
-                  key={path}
-                  label={title}
-                  component={Link}
-                  to={path}
-                  sx={{ minWidth: '10px', fontSize: '0.5rem' }}
-                  icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
-                />
-              ))}
-          </Tabs>
-        </Box>
-      </Box>
+        {Object.values(routes)
+          .filter((route) => route.title && route.inNavbar)
+          .map(({ title, path, icon: Icon }) => (
+            <BottomNavigationAction
+              key={path}
+              label={title}
+              component={Link}
+              to={path}
+              sx={{ minWidth: '10px', fontSize: '0.5rem' }}
+              icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
+            />
+          ))}
+      </BottomNavigation>
     );
   }
 
