@@ -41,11 +41,11 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
         sx={{
           width: '100%',
           bgcolor: 'background.paper',
+          position: 'fixed',
         }}
         value={selectedTab}
         onChange={handleChange}
         ref={tabRef}
-        position="fixed"
       >
         {Object.values(routes)
           .filter((route) => route.title && route.inNavbar)
