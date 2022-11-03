@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -13,13 +13,12 @@ import HotKeys from '@/sections/HotKeys';
 import Notifications from '@/sections/Notifications';
 import SW from '@/sections/SW';
 import Sidebar from '@/sections/Sidebar';
-import { getPageHeight } from './routes/Pages/utils';
 import { useRecoilState } from 'recoil';
-import { bottomHeight } from './state';
+import { bottomHeight, topHeight } from './state';
 
 function App() {
-  const [topBarHeight, setTopBarHeight] = useState(0);
-  const [botBarHeight, setBotBarHeight] = useRecoilState(bottomHeight);
+  const [, setTopBarHeight] = useRecoilState(topHeight);
+  const [, setBotBarHeight] = useRecoilState(bottomHeight);
 
   return (
     <Fragment>
@@ -30,7 +29,7 @@ function App() {
         <SW />
         <BrowserRouter>
           <Header onHeightChange={setTopBarHeight} />
-          <Pages height={(theme) => getPageHeight(theme, topBarHeight, botBarHeight)} />
+          <Pages />
           <Sidebar onHeightChange={setBotBarHeight} />
         </BrowserRouter>
       </LocalizationProvider>

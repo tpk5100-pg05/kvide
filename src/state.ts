@@ -5,4 +5,9 @@ const bottomHeight = atom({
   default: 0,
 });
 
-export { bottomHeight };
+const topHeight = atom({
+  key: 'TopHeight',
+  default: 0,
+});
+
+export { bottomHeight, topHeight };

@@ -10,7 +10,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 import { routes } from '@/routes';
 import useSidebar from '@/store/sidebar';
-import { Box, Tab, Tabs } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import { SyntheticEvent, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOrientation from '@/hooks/useOrientation';
 
@@ -29,7 +29,7 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
 
   useLayoutEffect(() => {
     onHeightChange(tabRef?.current?.clientHeight || 0);
-  }, [tabRef?.current?.clientHeight, onHeightChange]);
+  }, [isPortrait, tabRef?.current?.clientHeight, onHeightChange]);
 
   const handleChange = (_: SyntheticEvent<Element, Event>, newTab: number) => {
     setSelectedTab(newTab);
@@ -37,45 +37,29 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
 
   if (isPortrait) {
     return (
-      <Box
-        sx={{
-          width: '100%',
-          bottom: '0px',
-          bgcolor: 'background.paper',
-          zIndex: 10000,
-          position: 'sticky',
-        }}
-        ref={tabRef}
-      >
-        <Box
+      <Box sx={{ position: 'fixed', bottom: '0', left: '0', right: '0' }}>
+        <BottomNavigation
           sx={{
-            borderBottom: 0,
             width: '100%',
             bgcolor: 'background.paper',
           }}
-          color={'divider'}
+          value={selectedTab}
+          onChange={handleChange}
+          ref={tabRef}
         >
-          <Tabs
-            sx={{ width: '100%' }}
-            variant={'fullWidth'}
-            value={selectedTab}
-            onChange={handleChange}
-            centered
-          >
-            {Object.values(routes)
-              .filter((route) => route.title && route.inNavbar)
-              .map(({ title, path, icon: Icon }) => (
-                <Tab
-                  key={path}
-                  label={title}
-                  component={Link}
-                  to={path}
-                  sx={{ minWidth: '10px', fontSize: '0.5rem' }}
-                  icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
-                />
-              ))}
-          </Tabs>
-        </Box>
+          {Object.values(routes)
+            .filter((route) => route.title && route.inNavbar)
+            .map(({ title, path, icon: Icon }) => (
+              <BottomNavigationAction
+                key={path}
+                label={title}
+                component={Link}
+                to={path}
+                sx={{ minWidth: '10px', fontSize: '0.5rem' }}
+                icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
+              />
+            ))}
+        </BottomNavigation>
       </Box>
     );
   }
