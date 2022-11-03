@@ -1,4 +1,5 @@
 import welcome from '@/utils/welcome';
+import './firebase';
 
 // Root contains the main dependencies and providers of the base app
 //  - React, ReactDom, RecoilRoot, HelmetProvider, ThemeProvider, MUI-core)

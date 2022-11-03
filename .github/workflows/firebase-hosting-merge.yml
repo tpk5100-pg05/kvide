@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
+      - run: ${{ secrets.PRODUCTION_ENVIRONMENT }} > ./env.production
       - run: yarn install --immutable && yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
