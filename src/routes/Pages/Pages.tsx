@@ -16,13 +16,15 @@ function Pages() {
   return (
     <Box
       sx={{
-        height: '100vh',
+        position: 'fixed',
+        height: '100%',
         width: '100%',
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
         pt: `${top}px`,
         pb: `${bottom}px`,
+        overflow: 'hidden',
       }}
     >
       <FlexBox
