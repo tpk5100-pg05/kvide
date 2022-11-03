@@ -10,7 +10,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 import { routes } from '@/routes';
 import useSidebar from '@/store/sidebar';
-import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import { SyntheticEvent, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import useOrientation from '@/hooks/useOrientation';
 
@@ -37,29 +37,30 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
 
   if (isPortrait) {
     return (
-      <BottomNavigation
-        sx={{
-          width: '100%',
-          bgcolor: 'background.paper',
-          position: 'fixed',
-        }}
-        value={selectedTab}
-        onChange={handleChange}
-        ref={tabRef}
-      >
-        {Object.values(routes)
-          .filter((route) => route.title && route.inNavbar)
-          .map(({ title, path, icon: Icon }) => (
-            <BottomNavigationAction
-              key={path}
-              label={title}
-              component={Link}
-              to={path}
-              sx={{ minWidth: '10px', fontSize: '0.5rem' }}
-              icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
-            />
-          ))}
-      </BottomNavigation>
+      <Box sx={{ position: 'fixed', bottom: '0', left: '0', right: '0' }}>
+        <BottomNavigation
+          sx={{
+            width: '100%',
+            bgcolor: 'background.paper',
+          }}
+          value={selectedTab}
+          onChange={handleChange}
+          ref={tabRef}
+        >
+          {Object.values(routes)
+            .filter((route) => route.title && route.inNavbar)
+            .map(({ title, path, icon: Icon }) => (
+              <BottomNavigationAction
+                key={path}
+                label={title}
+                component={Link}
+                to={path}
+                sx={{ minWidth: '10px', fontSize: '0.5rem' }}
+                icon={Icon ? <Icon fontSize={'small'} /> : <DefaultIcon fontSize="small" />}
+              />
+            ))}
+        </BottomNavigation>
+      </Box>
     );
   }
 

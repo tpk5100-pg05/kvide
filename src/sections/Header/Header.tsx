@@ -38,8 +38,8 @@ function Header({ onHeightChange }: { onHeightChange: (height: number) => void }
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }} ref={ref}>
-      <AppBar color="primary" elevation={1} position="static">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar color="primary" ref={ref} elevation={1} position="fixed">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <FlexBox sx={{ alignItems: 'center' }}>
             {!isPortrait && (

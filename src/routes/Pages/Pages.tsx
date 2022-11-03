@@ -5,20 +5,25 @@ import Box from '@mui/material/Box';
 import { routes } from '..';
 import { FlexBox } from '@/components/styled';
 import useOrientation from '@/hooks/useOrientation';
-import { Theme } from '@mui/material';
+import { bottomHeight, topHeight } from '@/state';
+import { useRecoilState } from 'recoil';
 
-function Pages({ height }: { height: (theme: Theme) => string }) {
+function Pages() {
   const isPortrait = useOrientation();
+  const [bottom] = useRecoilState(bottomHeight);
+  const [top] = useRecoilState(topHeight);
 
   return (
     <Box
       sx={{
-        height: height,
+        height: '100vh',
         width: '100%',
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'auto',
+        pt: `${top}px`,
+        pb: `${bottom}px`,
       }}
     >
       <FlexBox
