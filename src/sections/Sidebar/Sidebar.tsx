@@ -29,7 +29,7 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
 
   useLayoutEffect(() => {
     onHeightChange(tabRef?.current?.clientHeight || 0);
-  }, [tabRef?.current?.clientHeight, onHeightChange]);
+  }, [isPortrait, tabRef?.current?.clientHeight, onHeightChange]);
 
   const handleChange = (_: SyntheticEvent<Element, Event>, newTab: number) => {
     setSelectedTab(newTab);
