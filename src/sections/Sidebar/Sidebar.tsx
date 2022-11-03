@@ -43,7 +43,7 @@ function Sidebar({ onHeightChange }: { onHeightChange: (height: number) => void 
           bottom: '0px',
           bgcolor: 'background.paper',
           zIndex: 10000,
-          position: 'sticky',
+          position: 'static',
         }}
         ref={tabRef}
       >
